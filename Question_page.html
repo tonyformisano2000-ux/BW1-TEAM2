@@ -85,6 +85,15 @@
         padding: 22px 32px;
         text-align: center;
       }
+      .label {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .remaining {
+        font-size: 12px;
+        opacity: 0.8;
+      }
     </style>
   </head>
   <body>
@@ -95,7 +104,8 @@
           <circle class="sfondo" cx="60" cy="60" r="45" />
           <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
         </svg>
-        <div class="numero" id="numero"><span></span></div>
+
+        <div class="numero" id="numero"></div>
       </div>
     </header>
     <main class="container">
@@ -110,6 +120,7 @@
       </div>
     </main>
     <script>
+      // timer
       let secondi = 30;
       let contatore = null;
       function avviaTimer() {
@@ -125,7 +136,37 @@
           }
         }, 1000);
       }
-      avviaTimer();
+      // fine timer
+      // inizio quiz
+      const domande = [
+        {
+          domanda: "Chi ha vinto il Mondiale 2006?",
+          risposte: ["Francia", "Italia", "Germania", "Brasile"],
+          corretta: 1,
+        },
+        {
+          domanda:
+            "Chi è il miglior marcatore della storia della Champions League?",
+          risposte: ["Messi", "Cristiano Ronaldo", "Lewandowski", "Benzema"],
+          corretta: 1,
+        },
+        {
+          domanda:
+            "In quale squadra ha giocato Diego Armando Maradona in Italia?",
+          risposte: ["Juventus", "Roma", "Napoli", "Inter"],
+          corretta: 2,
+        },
+        {
+          domanda: "Quanti giocatori ci sono in campo per squadra?",
+          risposte: ["9", "10", "11", "12"],
+          corretta: 2,
+        },
+        {
+          domanda: "Quale nazionale ha vinto più Mondiali?",
+          risposte: ["Italia", "Germania", "Argentina", "Brasile"],
+          corretta: 3,
+        },
+      ];
     </script>
   </body>
 </html>
