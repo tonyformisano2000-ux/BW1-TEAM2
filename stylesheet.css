@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   font-weight: 400;
+  font-size: 16px;
   background-image: url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
@@ -12,6 +13,18 @@ h1,
 h2 {
   font-family: "Outfit", sans-serif;
   font-weight: 700;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+span {
+  font-weight: bold;
+}
+
+.logo {
+    /* aggiungere css logo */
 }
 
 .button {
@@ -43,8 +56,29 @@ h2 {
 }
 
 .answer:hover {
-  background: linear-gradient(#d20094, #900080);
+  background: linear-gradient(to bottom #d20094, #900080);
 }
+
+.timer {
+  background: conic-gradient(
+    #00ffff 0% var(--percent),
+    transparent var(--percent) 100%
+  );
+  /* collegarla al passare dei secondi in js */
+}
+
+.torta {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+
+  background: conic-gradient(
+    #00ffff 0% var(--percent),
+    #d20094 var(--percent) 100%
+  );
+}
+/* collegarla alle percentuali dei risultati in js */
 
 .stars {
   font-size: 30px;
