@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 100vh;
+  position: relative;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 40px;
+}
+
+footer {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+  right: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h1,
+h2 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 60px;
+  line-height: 1.1;
+}
+
+p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+span {
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #d20094;
+
+  color: white;
+}
+
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.welcome-layout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -50%);
+}
+
+.quiz-layout {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.result-layout {
+  /* aggiungere css */
+}
+
+.feedback-layout {
+  /* aggiungere css */
+}
+
+.Logo {
+  width: 200px;
+  margin: 40px;
+}
+
+.button {
+  padding: 15px 40px;
+
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+.answer {
+  width: 300px;
+  padding: 15px;
+  margin: 10px;
+
+  border-radius: 10px;
+  border: 2px solid #ffffff4d;
+
+  background: transparent;
+  color: white;
+}
+
+.answer:hover {
+  background: linear-gradient(to bottom #d20094, #900080);
+}
+
+.timer {
+  background: conic-gradient(
+    #00ffff 0% var(--percent),
+    transparent var(--percent) 100%
+  );
+  /* collegarla al passare dei secondi in js */
+}
+
+.torta {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+
+  background: conic-gradient(
+    #00ffff 0% var(--percent),
+    #d20094 var(--percent) 100%
+  );
+}
+/* collegarla alle percentuali dei risultati in js */
+
+#stars span {
+  font-size: 30px;
+  color: #444;
+  cursor: pointer;
+}
+
+#stars .clicked {
+  color: #00ffff;
+}
