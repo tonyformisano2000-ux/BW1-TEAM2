@@ -13,17 +13,26 @@ body {
 
 header {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> babd52af191843938b7cb097764ac673654ffd8a
   /* position: absolute;
   top: 20px;
   left: 40px; */
   padding: 1em;
   display: flex;
   justify-content: space-between;
+<<<<<<< HEAD
 =======
   position: absolute;
   top: 20px;
   left: 40px;
 >>>>>>> main
+=======
+  position: absolute;
+  top: 20px;
+  left: 40px;
+>>>>>>> babd52af191843938b7cb097764ac673654ffd8a
 }
 
 main {
@@ -38,9 +47,13 @@ footer {
   left: 80px;
   right: 40px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> main
+=======
+
+>>>>>>> babd52af191843938b7cb097764ac673654ffd8a
   display: flex;
   justify-content: space-between;
   align-items: center;
