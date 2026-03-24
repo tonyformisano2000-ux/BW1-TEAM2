@@ -169,6 +169,28 @@ input[type="checkbox"] {
     #d20094 var(--percent) 100%
   );
 }
+
+.torta::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #1a1a1a;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.torta .testo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none; 
+}
 /* collegarla alle percentuali dei risultati in js */
 
 #stars span {
