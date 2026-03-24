@@ -183,3 +183,12 @@ input[type="checkbox"] {
   stroke: #ffffff;
   stroke-width: 10;
 }
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#check {
+  margin-top: auto;
+  margin-bottom: auto;
+}
