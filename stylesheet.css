@@ -168,3 +168,26 @@ input[type="checkbox"] {
 #stars .clicked {
   color: #00ffff;
 }
+.bordo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+}
+.sfondo {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 10;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#check {
+  margin-top: auto;
+  margin-bottom: auto;
+}
