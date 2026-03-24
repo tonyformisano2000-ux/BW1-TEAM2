@@ -7,9 +7,10 @@ function avviaTimer() {
   clearInterval(contatore);
   let secondi = 30;
   document.getElementById("numero").textContent = secondi;
+  document.getElementById("arco").style.strokeDashoffset = 283;
   contatore = setInterval(function () {
-    secondi = secondi - 1;
-    document.getElementById("numero").textContent = secondi;
+    secondi = secondi - 1 / 60;
+    document.getElementById("numero").textContent = Math.ceil(secondi);
     let nascosto = (283 * secondi) / 30;
     document.getElementById("arco").style.strokeDashoffset = nascosto;
 
@@ -19,7 +20,7 @@ function avviaTimer() {
       nrDomanda[0].innerText = indice + 1;
       mostraDomande();
     }
-  }, 1000);
+  }, 1000 / 60);
 }
 // fine timer
 //SCALA STELLINE
