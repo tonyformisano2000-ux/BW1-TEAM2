@@ -130,43 +130,7 @@
           risposte: ["Francia", "Italia", "Germania", "Brasile"],
           corretta: 1,
         },
-        {
-          domanda: "Chi ha vinto il Mondiale 2006?",
-          risposte: ["Francia", "Italia", "Germania", "Brasile"],
-          corretta: 1,
-        },
-        {
-          domanda: "Chi ha vinto il Mondiale 2006?",
-          risposte: ["Francia", "Italia", "Germania", "Brasile"],
-          corretta: 1,
-        },
-        {
-          domanda:
-            "Chi è il miglior marcatore della storia della Champions League?",
-          risposte: ["Messi", "Cristiano Ronaldo", "Lewandowski", "Benzema"],
-          corretta: 1,
-        },
-        {
-          domanda:
-            "In quale squadra ha giocato Diego Armando Maradona in Italia?",
-          risposte: ["Juventus", "Roma", "Napoli", "Inter"],
-          corretta: 2,
-        },
-        {
-          domanda: "Quanti giocatori ci sono in campo per squadra?",
-          risposte: ["9", "10", "11", "12"],
-          corretta: 2,
-        },
-        {
-          domanda: "Quale nazionale ha vinto più Mondiali?",
-          risposte: ["Italia", "Germania", "Argentina", "Brasile"],
-          corretta: 3,
-        },
-        {
-          domanda: "Chi ha vinto il Mondiale 2006?",
-          risposte: ["Francia", "Italia", "Germania", "Brasile"],
-          corretta: 1,
-        },
+
         {
           domanda:
             "Chi è il miglior marcatore della storia della Champions League?",
@@ -201,7 +165,7 @@
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti`;
+          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
           bottoni.forEach((bottone) => (bottone.style.display = "none"));
           document.querySelector(".timer").style.display = "none";
           document.querySelector("footer p").style.visibility = "hidden";
