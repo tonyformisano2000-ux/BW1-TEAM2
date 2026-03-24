@@ -193,16 +193,38 @@ input[type="checkbox"]:checked::after {
   width: 300px;
   padding: 15px;
   margin: 10px;
-
   border-radius: 10px;
   border: 2px solid #ffffff4d;
-
   background: transparent;
   color: white;
 }
 
 .answer-btn:hover {
   background: linear-gradient(to bottom, #d20094, #900080);
+}
+
+.bordo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+}
+.timer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+#numero {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
 }
 
 /* ========================= */
@@ -273,15 +295,6 @@ input[type="checkbox"]:checked::after {
   justify-content: center;
 }
 
-.bordo {
-  fill: none;
-  stroke: #00ffff;
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 283;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 0.9s linear;
-}
 .sfondo {
   fill: none;
   stroke: #ffffff;
