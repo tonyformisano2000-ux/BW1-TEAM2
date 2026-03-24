@@ -123,7 +123,7 @@ input[type="checkbox"] {
   box-shadow: 0 0 20px #00ffff;
 }
 
-.answer {
+.answer-btn {
   width: 300px;
   padding: 15px;
   margin: 10px;
@@ -135,8 +135,8 @@ input[type="checkbox"] {
   color: white;
 }
 
-.answer:hover {
-  background: linear-gradient(to bottom #d20094, #900080);
+.answer-btn:hover {
+  background: linear-gradient(to bottom, #d20094, #900080);
 }
 
 .timer {
@@ -168,4 +168,18 @@ input[type="checkbox"] {
 
 #stars .clicked {
   color: #00ffff;
+}
+.bordo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+}
+.sfondo {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 10;
 }
