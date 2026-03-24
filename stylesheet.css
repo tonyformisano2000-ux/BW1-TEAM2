@@ -155,16 +155,9 @@ input[type="checkbox"] {
   /* collegarla al passare dei secondi in js */
 }
 
-.torta {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  position: relative;
-
-  background: conic-gradient(
-    #00ffff 0% var(--percent),
-    #d20094 var(--percent) 100%
-  );
+.torta h6,
+p {
+  text-align: center;
 }
 /* collegarla alle percentuali dei risultati in js */
 

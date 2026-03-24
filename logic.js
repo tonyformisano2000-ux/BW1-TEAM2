@@ -1,4 +1,4 @@
-const FACSIMILEVOTO = 7;
+const FACSIMILEVOTO = 5;
 const domanda = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const results = () => {
   const percentualeRisposteCorrette = (FACSIMILEVOTO / domanda.length) * 100;
@@ -14,12 +14,25 @@ const results = () => {
   console.log(nEserciziSbagliati);
 
   const torte = document.getElementsByClassName("Torte")[0];
-  torte.style.width = "300px";
-  torte.style.height = "300px";
+  torte.style.width = "250px";
+  torte.style.height = "250px";
   torte.style.borderRadius = "50%";
-  torte.style.background = `conic-gradient(#00ffff 0% ${percentualeRisposteSbagliate}% , #970082 ${percentualeRisposteCorrette}% 100%)`;
-  const maskRule = "radial-gradient(circle, transparent 55%, black 56%)";
+  torte.style.background = `conic-gradient(#d20094 0% ${percentualeRisposteSbagliate}%, #00ffff ${percentualeRisposteSbagliate}% 100% )`;
+  const maskRule = "radial-gradient(circle, transparent 47%, black 47.1%)";
   torte.style.WebkitMaskImage = maskRule;
   torte.style.maskImage = maskRule;
+  torte.style.boxShadow = "0 0 10px 10px gold"; // TOCCA CAPIRE PERCHE NON METTE LE SHADOWS
+  let innerCircleTextH6 = document.querySelector(".Torte>h6");
+  let innerCircleTextP = document.querySelector(".Torte>p");
+  if (FACSIMILEVOTO > 6) {
+    innerCircleTextH6.innerHTML =
+      "Congratulations!<span><b>You passed the exam</b></span>";
+    innerCircleTextP.innerText =
+      "We'll send you the certificate in few minutes. check your email (including promotions/spam folder)";
+  } else {
+    innerCircleTextH6.innerHTML =
+      "Oops! <span><b>You failed the exam</b></span>";
+    innerCircleTextP.innerText = "come back soon and try again, good luck!";
+  }
 };
-results(6);
+results(5);
