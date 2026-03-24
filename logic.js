@@ -82,11 +82,8 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
-    const nextPageBtn = document.createElement("a");
-    nextPageBtn.innerText += " PROCEDI";
-    nextPageBtn.classList.add("answer-btn", "next-page-btn");
-    nextPageBtn.setAttribute("href", "../page3/page3.html");
-    domanda.appendChild(nextPageBtn);
+    const btnNextPage = document.createElement("button");
+    btnNextPage.setAttribute("class", "answer-btn");
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
@@ -122,3 +119,39 @@ const mostraDomande = function (arr) {
   return punteggio;
 };
 mostraDomande();
+
+const results = (voto) => {
+  const percentualeRisposteCorrette = (voto / domande.length) * 100;
+  console.log(percentualeRisposteCorrette + "%");
+  const nEserciziCorretti = voto + ` / ${domande.length} questions`;
+  console.log(nEserciziCorretti);
+
+  const percentualeRisposteSbagliate = 100 - percentualeRisposteCorrette;
+  console.log(percentualeRisposteSbagliate + "% ");
+
+  const nEserciziSbagliati =
+    domande.length - voto + ` / ${domande.length} questions`;
+  console.log(nEserciziSbagliati);
+
+  const torte = document.getElementsByClassName("torta")[0];
+  torte.style.width = "250px";
+  torte.style.height = "250px";
+  torte.style.borderRadius = "50%";
+  torte.style.background = `conic-gradient(#d20094 0% ${percentualeRisposteSbagliate}%, #00ffff ${percentualeRisposteSbagliate}% 100% )`;
+  const maskRule = "radial-gradient(circle, transparent 47%, black 47.1%)";
+  torte.style.WebkitMaskImage = maskRule;
+  torte.style.maskImage = maskRule;
+  torte.style.boxShadow = "0 0 10px 10px gold"; // TOCCA CAPIRE PERCHE NON METTE LE SHADOWS
+  let innerCircleTextH6 = document.querySelector(".torta>h6");
+  let innerCircleTextP = document.querySelector(".torta>p");
+  if (voto > 6) {
+    innerCircleTextH6.innerHTML =
+      "Congratulations!<span><b>You passed the exam</b></span>";
+    innerCircleTextP.innerText =
+      "We'll send you the certificate in few minutes. check your email (including promotions/spam folder)";
+  } else {
+    innerCircleTextH6.innerHTML =
+      "Oops! <span><b>You failed the exam</b></span>";
+    innerCircleTextP.innerText = "come back soon and try again, good luck!";
+  }
+};
