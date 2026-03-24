@@ -208,7 +208,7 @@ input[type="checkbox"]:checked::after {
   /* stroke: white; */
   stroke: white;
   stroke-width: 10;
-  stroke-linecap: round;
+  transition: none;
   stroke-dasharray: 283;
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.9s linear;
