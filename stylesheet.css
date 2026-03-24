@@ -160,7 +160,7 @@ input[type="checkbox"] {
 /* collegarla alle percentuali dei risultati in js */
 
 #stars span {
-  font-size: 30px;
+  font-size: 60px;
   color: #444;
   cursor: pointer;
 }
