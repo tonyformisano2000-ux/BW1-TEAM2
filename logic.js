@@ -83,7 +83,7 @@ const mostraDomande = function (arr) {
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
     const nextPageBtn = document.createElement("a");
-    nextPageBtn.innerText += " PROCEDI";
+    nextPageBtn.innerText += "See the next page";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
     nextPageBtn.setAttribute("href", "../page3/page3.html");
     domanda.appendChild(nextPageBtn);
