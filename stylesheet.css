@@ -9,38 +9,42 @@ body {
   background-size: cover;
   background-position: center;
   color: white;
-  height: 100vh;
-  position: relative;
 }
 
-header {
-  position: absolute;
-  top: 20px;
-  left: 40px;
-}
+/* CORNICE GLOBALE */
 
-main {
+.page {
   max-width: 900px;
   margin: 0 auto;
-  padding: 80px 40px;
+  padding: 40px;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
-footer {
-  position: absolute;
-  bottom: 40px;
-  left: 80px;
-  right: 40px;
+/* HEADER */
 
+header {
+  margin-bottom: 40px;
+}
+
+.Logo {
+  width: 180px;
+}
+
+/* FOOTER */
+
+footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
-footer div {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+/* TITOLI */
 
 h1,
 h2 {
@@ -58,20 +62,28 @@ h2 {
   line-height: 1.1;
 }
 
-p {
-  margin-top: 10px;
-  line-height: 1.5;
-}
-
 h3 {
   font-size: 30px;
   margin-top: 20px;
   font-weight: 200;
 }
 
+/* TESTI */
+
+p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
 span {
   font-weight: bold;
 }
+
+.fucsia {
+  color: #d20094;
+}
+
+/* INPUT */
 
 input {
   width: 100%;
@@ -85,26 +97,7 @@ input {
   color: white;
 }
 
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 2px solid white;
-  background: transparent;
-  cursor: pointer;
-}
-
-input[type="checkbox"]:checked {
-  background-color: #00ffff;
-  border-color: #00ffff;
-}
-
-.Logo {
-  width: 200px;
-}
+/* BOTTONI */
 
 .button {
   padding: 15px 40px;
@@ -124,28 +117,73 @@ input[type="checkbox"]:checked {
   border-color: black;
 }
 
-.fucsia {
-  color: #d20094;
-}
-
-
-/* PRIMA PAGINA*/
+/* ========================= */
+/* PAGINA 1 - WELCOME */
+/* ========================= */
 
 .welcome-layout {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-60%, -50%);
+  max-width: 700px;
 }
 
-/* SECONDA PAGINA*/
+.welcome-layout h1 span {
+  display: block;
+  font-weight: 200;
+}
+
+.Instruction {
+  margin-top: 30px;
+}
+
+.Instruction ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.Instruction li {
+  margin-bottom: 10px;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid white;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00ffff;
+  border-color: #00ffff;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: black;
+  font-size: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========================= */
+/* PAGINA 2 - QUIZ */
+/* ========================= */
 
 .quiz-layout {
   text-align: center;
-  margin-top: 100px;
 }
 
-/* prova css bottoni risposte quiz*/
+.page2footer {
+  justify-content: center;
+}
+
+/*quiz buttons */
 .answer {
   width: 300px;
   padding: 15px;
@@ -161,33 +199,60 @@ input[type="checkbox"]:checked {
 .answer:hover {
   background: linear-gradient(to bottom, #d20094, #900080);
 }
-/* TERZA PAGINA*/
+
+/* ========================= */
+/* PAGINA 3 - RESULT */
+/* ========================= */
 
 .result-layout {
   text-align: center;
-  margin-top: 100px;
 }
+
+.result-title {
+  margin-bottom: 30px;
+}
+
+.result-layout section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+
+  margin-top: 40px;
+}
+
+.result-layout section div {
+  text-align: center;
+}
+
+.result-footer {
+  justify-content: center;
+}
+
+/* torta */
 
 .torta {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  position: relative;
 
   background: conic-gradient(
     #00ffff 0% var(--percent),
     #d20094 var(--percent) 100%
   );
 }
-/* collegarla alle percentuali dei risultati in js */
 
-/* QUARTA PAGINA*/
+/* ========================= */
+/* PAGINA 4 - FEEDBACK */
+/* ========================= */
 
 .feedback-layout {
-  max-width: 800px;
   text-align: center;
-  margin-top: 100px;
+  max-width: 800px;
+  margin: 0 auto;
 }
+
+/* stelle */
 
 #stars span {
   font-size: 30px;
@@ -195,15 +260,10 @@ input[type="checkbox"]:checked {
   cursor: pointer;
 }
 
-.page4footer {
-  position: absolute;
-  bottom: 40px;
-  left: 80px;
-}
-
-/* proprietá da attivare con js al click della stella scelta. La lascio commentata*/
- #stars .clicked {
+#stars .clicked {
   color: #00ffff;
 }
 
-
+.page4footer {
+  justify-content: center;
+}
