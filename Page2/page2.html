@@ -9,50 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../stylesheet.css" />
-    <style>
-      .bordo {
-        fill: none;
-        stroke: #00ffff;
-        stroke-width: 10;
-        stroke-linecap: round;
-        stroke-dasharray: 283;
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset 0.9s linear;
-      }
-      .timer {
-        position: relative;
-        width: 120px;
-        height: 120px;
-      }
-      #numero {
-        color: white;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 40px;
-        font-weight: bold;
-      }
-      .answers {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        width: 70%;
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 100px;
-      }
-      .answer-btn {
-        border-radius: 50px;
-        color: rgb(0, 0, 0);
-        font-family: "Barlow", sans-serif;
-        font-size: 1em;
-        font-weight: 600;
-        padding: 22px 32px;
-        text-align: center;
-      }
-    </style>
+    
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
       rel="stylesheet"
@@ -66,39 +23,39 @@
   </head>
   <body>
     <div class="page">
-    <header>
-      <div>
-        <img class="Logo" src="../Page1/epicode_logo.png" alt="Logo" />
-      </div>
-      <div class="timer">
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle class="sfondo" cx="60" cy="60" r="45" />
-          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
-        </svg>
+      <header>
+        <div>
+          <img class="Logo" src="../Page1/epicode_logo.png" alt="Logo" />
+        </div>
+        <div class="timer">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="sfondo" cx="60" cy="60" r="45" />
+            <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+          </svg>
 
-        <div class="numero" id="numero"></div>
-      </div>
-    </header>
-    <!--il timer andrebbe nel header-->
+          <div class="numero" id="numero"></div>
+        </div>
+      </header>
+      <!--il timer andrebbe nel header-->
 
-    <main class="quiz-layout">
-      <div>
-        <h2><!-- spazione per js--></h2>
-      </div>
-      <div class="answers">
-        <button class="answer-btn"></button>
-        <button class="answer-btn"></button>
-        <button class="answer-btn"></button>
-        <button class="answer-btn"></button>
-      </div>
-    </main>
-    <footer class="page2footer">
-      <p>
-        <span>QUESTION</span>
-        <span> 1 </span>
-        <span class="fucsia"> /10 </span>
-      </p>
-    </footer>
+      <main class="quiz-layout">
+        <div>
+          <h2><!-- spazione per js--></h2>
+        </div>
+        <div class="answers">
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+        </div>
+      </main>
+      <footer class="page2footer">
+        <p>
+          <span>QUESTION</span>
+          <span> 1 </span>
+          <span class="fucsia"> /10 </span>
+        </p>
+      </footer>
     </div>
 
     <script>
@@ -202,7 +159,6 @@
         return punteggio;
       };
       mostraDomande();
-      
     </script>
   </body>
 </html>
