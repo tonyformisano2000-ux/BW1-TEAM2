@@ -1,44 +1,56 @@
+/* IN COMUNE TRA LE PAGINE*/
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
-  font-weight: 400;
+  font-weight: 200;
   font-size: 16px;
   background-image: url("./assets/bg.jpg");
   background-size: cover;
   background-position: center;
   color: white;
-  height: 100vh;
-  position: relative;
 }
 
+/* biagio*/
 header {
   padding: 1em;
   display: flex;
   justify-content: space-between;
 }
 
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 100px 40px;
+/* HEADER */
+/*vale */
+header {
+  margin-bottom: 40px;
 }
 
-footer {
-  position: absolute;
-  bottom: 40px;
-  left: 80px;
-  right: 40px;
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
 
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.Logo {
+  width: 180px;
+}
+
+/* FOOTER */
+
+footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
-footer div {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+/* TITOLI */
 
 h1,
 h2 {
@@ -51,18 +63,33 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 30px;
+  margin-top: 20px;
+  font-weight: 200;
+}
+
+/* TESTI */
+
 p {
   margin-top: 10px;
   line-height: 1.5;
 }
 
-h3 {
-  margin-top: 20px;
-}
-
 span {
   font-weight: bold;
 }
+
+.fucsia {
+  color: #d20094;
+}
+
+/* INPUT */
 
 input {
   width: 100%;
@@ -76,36 +103,7 @@ input {
   color: white;
 }
 
-input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.welcome-layout {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-60%, -50%);
-}
-
-.quiz-layout {
-  text-align: center;
-  margin-top: 150px;
-}
-
-.result-layout {
-  /* aggiungere css */
-}
-
-.feedback-layout {
-  /* aggiungere css */
-}
-
-.Logo {
-  width: 200px;
-  margin: 40px;
-}
+/* BOTTONI */
 
 .button {
   padding: 15px 40px;
@@ -121,8 +119,77 @@ input[type="checkbox"] {
 .button:hover {
   background-color: #00ffff;
   box-shadow: 0 0 20px #00ffff;
+  color: black;
+  border-color: black;
 }
 
+/* ========================= */
+/* PAGINA 1 - WELCOME */
+/* ========================= */
+
+.welcome-layout {
+  max-width: 700px;
+}
+
+.welcome-layout h1 span {
+  display: block;
+  font-weight: 200;
+}
+
+.Instruction {
+  margin-top: 30px;
+}
+
+.Instruction ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.Instruction li {
+  margin-bottom: 10px;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid white;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00ffff;
+  border-color: #00ffff;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: black;
+  font-size: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ========================= */
+/* PAGINA 2 - QUIZ */
+/* ========================= */
+
+.quiz-layout {
+  text-align: center;
+}
+
+.page2footer {
+  justify-content: center;
+}
+
+/*quiz buttons */
 .answer-btn {
   width: 300px;
   padding: 15px;
@@ -139,26 +206,59 @@ input[type="checkbox"] {
   background: linear-gradient(to bottom, #d20094, #900080);
 }
 
-.timer {
-  background: conic-gradient(
-    #00ffff 0% var(--percent),
-    transparent var(--percent) 100%
-  );
-  /* collegarla al passare dei secondi in js */
+/* ========================= */
+/* PAGINA 3 - RESULT */
+/* ========================= */
+
+.result-layout {
+  text-align: center;
 }
+
+.result-title {
+  margin-bottom: 30px;
+}
+
+.result-layout section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+
+  margin-top: 40px;
+}
+
+.result-layout section div {
+  text-align: center;
+}
+
+.result-footer {
+  justify-content: center;
+}
+
+/* torta */
 
 .torta {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  position: relative;
 
   background: conic-gradient(
     #00ffff 0% var(--percent),
     #d20094 var(--percent) 100%
   );
 }
-/* collegarla alle percentuali dei risultati in js */
+
+/* ========================= */
+/* PAGINA 4 - FEEDBACK */
+/* ========================= */
+
+.feedback-layout {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* stelle */
 
 #stars span {
   font-size: 60px;
@@ -169,6 +269,11 @@ input[type="checkbox"] {
 #stars .clicked {
   color: #00ffff;
 }
+
+.page4footer {
+  justify-content: center;
+}
+
 .bordo {
   fill: none;
   stroke: #00ffff;
