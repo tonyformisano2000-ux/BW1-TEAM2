@@ -36,14 +36,21 @@
       </div>
     </main>
     <footer>
-      <div>
-        <input type="checkbox" />
+      <div class="check">
+        <input id="check" type="checkbox" />
         <span>I promise to answer myself without help from anyone</span>
       </div>
-      <button class="button">PROCEED</button>
+      <button class="button" onclick="vaiAvanti()">PROCEED</button>
+      <script>
+        function vaiAvanti() {
+          const check = document.getElementById("check");
+          if (check.checked) {
+            window.location.href = "../Page2/Page2.html";
+          } else {
+            alert("devi prima spuntare la casella!!");
+          }
+        }
+      </script>
     </footer>
-
-    <script></script>
-    </div>
   </body>
 </html>

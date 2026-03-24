@@ -11,7 +11,18 @@ body {
   color: white;
 }
 
-/* CORNICE GLOBALE */
+/* biagio*/
+header {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* HEADER */
+/*vale */
+header {
+  margin-bottom: 40px;
+}
 
 .page {
   max-width: 900px;
@@ -24,11 +35,6 @@ body {
   flex-direction: column;
 }
 
-/* HEADER */
-
-header {
-  margin-bottom: 40px;
-}
 
 .Logo {
   width: 180px;
@@ -184,7 +190,7 @@ input[type="checkbox"]:checked::after {
 }
 
 /*quiz buttons */
-.answer {
+.answer-btn {
   width: 300px;
   padding: 15px;
   margin: 10px;
@@ -196,7 +202,7 @@ input[type="checkbox"]:checked::after {
   color: white;
 }
 
-.answer:hover {
+.answer-btn:hover {
   background: linear-gradient(to bottom, #d20094, #900080);
 }
 
@@ -255,7 +261,7 @@ input[type="checkbox"]:checked::after {
 /* stelle */
 
 #stars span {
-  font-size: 30px;
+  font-size: 60px;
   color: #444;
   cursor: pointer;
 }
@@ -266,4 +272,28 @@ input[type="checkbox"]:checked::after {
 
 .page4footer {
   justify-content: center;
+}
+
+.bordo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+}
+.sfondo {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 10;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#check {
+  margin-top: auto;
+  margin-bottom: auto;
 }
