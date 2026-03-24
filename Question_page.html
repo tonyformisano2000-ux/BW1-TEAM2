@@ -133,12 +133,13 @@
 
           if (secondi <= 0) {
             clearInterval(contatore);
+            risposta(-1);
           }
         }, 1000);
       }
       // fine timer
       // inizio quiz
-      avviaTimer();
+
       const domande = [
         {
           domanda: "Chi ha vinto il Mondiale 2006?",
@@ -168,6 +169,40 @@
           corretta: 3,
         },
       ];
+      let index = 0;
+      let punteggio = 0;
+
+      const domandaP = document.querySelector(".question p");
+      const bottoni = document.querySelectorAll(".answer-btn");
+
+      function mostra() {
+        clearInterval(contatore);
+        secondi = 30;
+        avviaTimer();
+        const q = domande[index];
+        domandaP.innerHTML = q.domanda;
+        bottoni.forEach((b, i) => {
+          b.innerHTML = q.risposte[i];
+          b.onclick = () => risposta(i);
+        });
+      }
+
+      function risposta(i) {
+        if (i === domande[index].corretta) punteggio++;
+        console.log(punteggio)
+        index++;
+        if (index < domande.length) {
+          mostra();
+        } else {
+          fine();
+        }
+      }
+
+      function fine() {
+        document.querySelector("main").innerHTML =
+          `<h1 style="color:white;text-align:center;">Hai fatto ${punteggio} su ${domande.length}</h1>`;
+      }
+      mostra();
     </script>
   </body>
 </html>
