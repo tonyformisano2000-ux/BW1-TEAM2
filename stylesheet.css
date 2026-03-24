@@ -1,3 +1,5 @@
+/* IN COMUNE TRA LE PAGINE*/
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -20,7 +22,7 @@ header {
 main {
   max-width: 900px;
   margin: 0 auto;
-  padding: 100px 40px;
+  padding: 80px 40px;
 }
 
 footer {
@@ -51,6 +53,11 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  font-size: 40px;
+  line-height: 1.1;
+}
+
 p {
   margin-top: 10px;
   line-height: 1.5;
@@ -59,6 +66,7 @@ p {
 h3 {
   font-size: 30px;
   margin-top: 20px;
+  font-weight: 200;
 }
 
 span {
@@ -94,29 +102,8 @@ input[type="checkbox"]:checked {
   border-color: #00ffff;
 }
 
-.welcome-layout {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-60%, -50%);
-}
-
-.quiz-layout {
-  text-align: center;
-  margin-top: 150px;
-}
-
-.result-layout {
-  /* aggiungere css */
-}
-
-.feedback-layout {
-  /* aggiungere css */
-}
-
 .Logo {
   width: 200px;
-  margin: 40px;
 }
 
 .button {
@@ -137,6 +124,28 @@ input[type="checkbox"]:checked {
   border-color: black;
 }
 
+.fucsia {
+  color: #d20094;
+}
+
+
+/* PRIMA PAGINA*/
+
+.welcome-layout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-60%, -50%);
+}
+
+/* SECONDA PAGINA*/
+
+.quiz-layout {
+  text-align: center;
+  margin-top: 100px;
+}
+
+/* prova css bottoni risposte quiz*/
 .answer {
   width: 300px;
   padding: 15px;
@@ -152,13 +161,11 @@ input[type="checkbox"]:checked {
 .answer:hover {
   background: linear-gradient(to bottom, #d20094, #900080);
 }
+/* TERZA PAGINA*/
 
-.timer {
-  background: conic-gradient(
-    #00ffff 0% var(--percent),
-    transparent var(--percent) 100%
-  );
-  /* collegarla al passare dei secondi in js */
+.result-layout {
+  text-align: center;
+  margin-top: 100px;
 }
 
 .torta {
@@ -174,16 +181,29 @@ input[type="checkbox"]:checked {
 }
 /* collegarla alle percentuali dei risultati in js */
 
+/* QUARTA PAGINA*/
+
+.feedback-layout {
+  max-width: 800px;
+  text-align: center;
+  margin-top: 100px;
+}
+
 #stars span {
   font-size: 30px;
   color: #444;
   cursor: pointer;
 }
 
-#stars .clicked {
+.page4footer {
+  position: absolute;
+  bottom: 40px;
+  left: 80px;
+}
+
+/* proprietá da attivare con js al click della stella scelta. La lascio commentata*/
+ #stars .clicked {
   color: #00ffff;
 }
 
-.fucsia {
-  color: #d20094;
-}
+
