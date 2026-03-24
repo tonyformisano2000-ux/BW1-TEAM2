@@ -122,6 +122,7 @@ const mostraDomande = function (arr) {
 };
 mostraDomande();
 
+//SCALA STELLINE
 const stars = document.querySelectorAll("#stars span");
 let savedIndex = -1;
 
