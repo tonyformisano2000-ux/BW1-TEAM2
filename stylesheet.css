@@ -118,7 +118,7 @@ input {
 .button:hover {
   background-color: #00ffff;
   box-shadow: 0 0 20px #00ffff;
-  color: black;
+  color: rgb(0, 0, 0);
   border-color: black;
 }
 
@@ -204,7 +204,50 @@ input[type="checkbox"]:checked::after {
 .answer-btn:hover {
   background: linear-gradient(to bottom, #d20094, #900080);
 }
-
+.bordo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.timer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+#numero {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+}
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 70%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+.answer-btn {
+  border-radius: 50px;
+  color: rgb(0, 0, 0);
+  font-family: "Barlow", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 22px 32px;
+  text-align: center;
+}
 /* ========================= */
 /* PAGINA 3 - RESULT */
 /* ========================= */
