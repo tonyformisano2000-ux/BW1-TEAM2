@@ -2,6 +2,7 @@
 // timer
 let contatore = null;
 let nrDomanda = document.querySelectorAll("footer p span");
+
 function avviaTimer() {
   clearInterval(contatore);
   let secondi = 30;
@@ -9,7 +10,7 @@ function avviaTimer() {
   contatore = setInterval(function () {
     secondi = secondi - 1;
     document.getElementById("numero").textContent = secondi;
-    let nascosto = 283 - (283 * secondi) / 30;
+    let nascosto = (283 * secondi) / 30;
     document.getElementById("arco").style.strokeDashoffset = nascosto;
 
     if (secondi <= 0) {
@@ -81,6 +82,8 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+    const btnNextPage = document.createElement("button");
+    btnNextPage.setAttribute("class", "answer-btn");
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
@@ -91,6 +94,7 @@ const mostraDomande = function (arr) {
   avviaTimer();
 
   //QUANTE DOMANDE ABBIAMO?
+  nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
   nrDomanda[1].innerText = `/ ${domande.length}`;
 
   //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
@@ -107,7 +111,7 @@ const mostraDomande = function (arr) {
       }
       indice++;
 
-      nrDomanda[0].innerText = indice + 1;
+      nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
 
       mostraDomande();
     };
