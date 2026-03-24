@@ -35,10 +35,19 @@
         <span class="clicked">★</span>
       </div>
       <h3>Leave us an open feedback about your experience so far</h3>
-      <input placeholder="Write your comment here" />
+      <input id="commentInput" placeholder="Write your comment here" />
     </main>
     <footer>
-      <button class="button">MORE INFO</button>
+      <button id="sendBtn" class="button" disabled>MORE INFO</button>
+      <script>
+        const input = document.getElementById("commentInput");
+        const button = document.getElementById("sendBtn");
+
+        input.addEventListener("input", () => {
+          const hasText = input.value.trim().length > 0;
+          button.disabled = !hasText;
+        });
+      </script>
     </footer>
     <script src="../logic.js"></script>
   </body>
