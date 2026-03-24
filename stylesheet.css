@@ -205,8 +205,8 @@ input[type="checkbox"]:checked::after {
 }
 .bordo {
   fill: none;
+  /* stroke: white; */
   stroke: white;
-  /* stroke: #00ffff; */
   stroke-width: 10;
   stroke-linecap: round;
   stroke-dasharray: 283;
@@ -214,6 +214,11 @@ input[type="checkbox"]:checked::after {
   transition: stroke-dashoffset 0.9s linear;
   transform: rotate(-90deg);
   transform-origin: center;
+}
+.sfondo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
 }
 .timer {
   position: relative;
@@ -238,6 +243,11 @@ input[type="checkbox"]:checked::after {
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
+}
+.next-page-btn {
+  display: block;
+  margin: 1em auto;
+  text-decoration: none;
 }
 /* ========================= */
 /* PAGINA 3 - RESULT */
@@ -307,20 +317,6 @@ input[type="checkbox"]:checked::after {
   justify-content: center;
 }
 
-.bordo {
-  fill: none;
-  stroke: #00ffff;
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 283;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 0.9s linear;
-}
-.sfondo {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 10;
-}
 .check {
   display: flex;
   align-items: center;
