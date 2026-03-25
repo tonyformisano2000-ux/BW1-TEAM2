@@ -34,13 +34,16 @@ stars.forEach((star, indice) => {
   });
 
   star.addEventListener("mouseenter", () => {
+    star.classList.add("hovered");
     stars.forEach((s, i) => s.classList.toggle("clicked", i <= indice));
   });
 
   star.addEventListener("mouseleave", () => {
+    star.classList.remove("hovered");
     stars.forEach((s, i) => s.classList.toggle("clicked", i <= savedIndex));
   });
 });
+
 // js per la parte delle stelle
 // inizio quiz
 const domande = [
@@ -84,7 +87,7 @@ const mostraDomande = function (arr) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
     localStorage.setItem("punteggio", punteggio);
     const nextPageBtn = document.createElement("a");
-    nextPageBtn.innerText += "See the next page";
+    nextPageBtn.innerText += "See the result";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
     nextPageBtn.setAttribute("href", "../page3/page3.html");
 
@@ -99,7 +102,7 @@ const mostraDomande = function (arr) {
 
   // QUANTE DOMANDE ABBIAMO?
   nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-  nrDomanda[1].innerText = `/ ${domande.length}`;
+  nrDomanda[1].innerHTML = `/ <span style=" color: #d20094;">${domande.length}</span>`;
 
   //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
   domanda.innerText = domande[indice].domanda;
