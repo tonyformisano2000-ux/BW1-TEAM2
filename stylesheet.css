@@ -179,6 +179,9 @@ input[type="checkbox"]:checked::after {
 .quiz-layout {
   text-align: center;
 }
+.quiz-layout h2 {
+  margin-top: 180px;
+}
 
 .page2footer {
   justify-content: center;
@@ -282,14 +285,27 @@ input[type="checkbox"]:checked::after {
 /* torta */
 
 .torta {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
 
   background: conic-gradient(
     #00ffff 0% var(--percent),
     #d20094 var(--percent) 100%
   );
+}
+.torta_text p {
+  margin-left: 19px;
+}
+.torta_text {
+  position: absolute;
+}
+.torta_text h6 {
+  font-size: 16px;
+  margin-left: 16px;
+}
+.torta_text h6 span {
+  color: #06c6d8;
 }
 
 /* ========================= */

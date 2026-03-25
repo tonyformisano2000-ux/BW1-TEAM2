@@ -9,7 +9,7 @@ function avviaTimer() {
   document.getElementById("numero").textContent = secondi;
   document.getElementById("arco").style.strokeDashoffset = 283;
   contatore = setInterval(function () {
-    secondi = secondi - 1 / 60;
+    secondi = secondi - 1;
     document.getElementById("numero").textContent = Math.ceil(secondi);
     let nascosto = (283 * secondi) / 30;
     document.getElementById("arco").style.strokeDashoffset = nascosto;
@@ -20,7 +20,7 @@ function avviaTimer() {
       nrDomanda[0].innerText = indice + 1;
       mostraDomande();
     }
-  }, 1000 / 60);
+  }, 1000);
 }
 // fine timer
 //SCALA STELLINE
@@ -82,16 +82,16 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+    localStorage.setItem("punteggio", punteggio);
     const nextPageBtn = document.createElement("a");
     nextPageBtn.innerText += "See the next page";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
     nextPageBtn.setAttribute("href", "../page3/page3.html");
-    nextPageBtn.setAttribute(`onclick `, `results(${punteggio}) `);
+
     domanda.appendChild(nextPageBtn);
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
-    return punteggio;
   }
 
   //RESETTIAMO IL TIMER
@@ -122,5 +122,3 @@ const mostraDomande = function (arr) {
   });
 };
 mostraDomande();
-localStorage.setItem(`punteggio`, `${punteggio}`);
-// window.location.href = "./page3/page3.html";
