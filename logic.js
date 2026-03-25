@@ -87,7 +87,7 @@ const mostraDomande = function (arr) {
     nextPageBtn.innerText += "See the next page";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
     nextPageBtn.setAttribute("href", "../page3/page3.html");
-    nextPageBtn.setAttribute(`onclick `, `results(${punteggio}) `);
+
     domanda.appendChild(nextPageBtn);
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
