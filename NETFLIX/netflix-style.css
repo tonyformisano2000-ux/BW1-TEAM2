@@ -34,17 +34,18 @@ body::before{
 header {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  padding: 1em;
-  padding-top: 30px;
-  padding-left: 0;
-  margin-bottom: 40px;
+  margin: 0;
+  margin-bottom: 30px;
+  background-color: black;
+  width: 100%;
+  padding-left: 20px;
 }
 
 .page {
   max-width: 900px;
   margin: 0 auto;
   padding: 60px;
+  padding-top: 0;
 
   min-height: 100vh;
 
@@ -55,7 +56,7 @@ header {
   margin: 0 100px;
 } */
 .Logo {
-  width: 180px;
+  width: 150px;
 }
 
 /* FOOTER */
@@ -115,7 +116,7 @@ input {
   margin-top: 20px;
   background: transparent;
   border: none;
-  border-bottom: 2px solid #d20094;
+  border-bottom: 2px solid red;
   color: white;
 }
 
@@ -239,7 +240,7 @@ input[type="checkbox"]:checked::after {
 }
 .sfondo {
   fill: none;
-  stroke: #00ffff;
+  stroke: red;
   stroke-width: 10;
 }
 .timer {
@@ -358,7 +359,7 @@ input[type="checkbox"]:checked::after {
 }
 
 #stars .clicked {
-  color: #00ffff;
+  color: red;
 }
 
 .page4footer {
