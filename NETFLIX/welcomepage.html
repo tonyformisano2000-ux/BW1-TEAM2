@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WELCOME PAGE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stylesheet.css" />
+  </head>
+  <body class="body">
+    <div class="page">
+    <header>
+      <div>
+        <img class="Logo" src="./epicode_logo.png" alt="Logo" />
+      </div>
+    </header>
+    <main class="welcome-layout ">
+      <h1>Welcome to<br>  <span>your exam</span></h1>
+      <div class="Instruction">
+        <h3><span class="fucsia" >Instructions</span></h3>
+        <p>
+          We don't expect most engineers to know the answers to all of these
+          questions,so don't worry if you're unsure of a few of them
+        </p>
+        <ul>
+          <li>
+            Each question is <span>timed </span>and can only be
+            <span>answered once.</span>
+          </li>
+          <li>
+            Changing browser tab or opening other windows will
+            <span>invalidate the question</span>
+          </li>
+          <li>This exam will take approx. <span> 0-5 minutes</span></li>
+        </ul>
+      </div>
+    </main>
+    <footer>
+      <div class="check">
+        <input id="check" type="checkbox" />
+        <h5>I promise to answer myself without help from anyone</h5>
+      </div>
+      <button class="button" onclick="vaiAvanti()">PROCEED</button>
+      <script>
+        function vaiAvanti() {
+          const check = document.getElementById("check");
+          if (check.checked) {
+            window.location.href = "../Page2/page2.html";
+          } else {
+            alert("devi prima spuntare la casella!!");
+          }
+        }
+      </script>
+    </footer>
+  </body>
+</html>

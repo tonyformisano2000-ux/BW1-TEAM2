@@ -1,0 +1,360 @@
+/* IN COMUNE TRA LE PAGINE*/
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  font-size: 16px;
+  background-image: url("./assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding: 1em;
+  padding-top: 30px;
+  padding-left: 0;
+  margin-bottom: 40px;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+/* .body .page {
+  margin: 0 100px;
+} */
+.Logo {
+  width: 180px;
+}
+
+/* FOOTER */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+/* TITOLI */
+
+h1,
+h2 {
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 60px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 30px;
+  margin-top: 20px;
+  font-weight: 200;
+}
+
+/* TESTI */
+
+p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+span {
+  font-weight: bold;
+}
+
+.fucsia {
+  color: #d20094;
+}
+
+/* INPUT */
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #d20094;
+  color: white;
+}
+
+/* BOTTONI */
+
+.button {
+  padding: 15px 40px;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 25px #470096;
+}
+
+.button:hover {
+  background-color: #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+  color: rgb(0, 0, 0);
+  border-color: #00ffff;
+}
+
+/* ========================= */
+/* PAGINA 1 - WELCOME */
+/* ========================= */
+
+.welcome-layout {
+  max-width: 700px;
+}
+
+.Instruction {
+  margin-top: 30px;
+}
+
+.Instruction ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.Instruction li {
+  margin-bottom: 10px;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid white;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00ffff;
+  border-color: #00ffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: black;
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* ========================= */
+/* PAGINA 2 - QUIZ */
+/* ========================= */
+
+.quiz-layout {
+  text-align: center;
+}
+.quiz-layout h2 {
+  margin-top: 180px;
+}
+
+.page2footer {
+  justify-content: center;
+}
+
+/*quiz buttons */
+.answer-btn {
+  width: 300px;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 50px;
+  background: transparent;
+  color: white;
+  font-family: "Barlow", sans-serif;
+  padding: 22px 32px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-top: 3px solid #ffffff4d;
+}
+
+.answer-btn:hover {
+  background: linear-gradient(to bottom, #d20094, #900080);
+  border-bottom: 3px solid #d20094;
+  border-top: 3px solid white;
+}
+
+.bordo {
+  fill: none;
+  /* stroke: white; */
+  stroke: white;
+  stroke-width: 10;
+  transition: none;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.9s linear;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.sfondo {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 10;
+}
+.timer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+#numero {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  font-weight: bold;
+}
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 70%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+.next-page-btn {
+  display: block;
+  margin: 3em auto;
+  text-decoration: none;
+  font-size: 0.7em;
+}
+/* ========================= */
+/* PAGINA 3 - RESULT */
+/* ========================= */
+
+.result-layout {
+  text-align: center;
+}
+
+.result-title {
+  margin-bottom: 30px;
+}
+
+.result-title h2 {
+  margin-bottom: 0;
+  font-size: 50px;
+}
+
+.result-title h3 {
+  margin-top: 0;
+}
+
+.result-layout section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+
+  margin-top: 40px;
+}
+
+.result-layout section div {
+  text-align: center;
+}
+
+.result-footer {
+  justify-content: center;
+}
+
+/* torta */
+
+.torta {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+
+  background: conic-gradient(
+    #00ffff 0% var(--percent),
+    #d20094 var(--percent) 100%
+  );
+}
+.torta_text p {
+  margin-left: 19px;
+}
+.torta_text {
+  position: absolute;
+}
+.torta_text h6 {
+  font-size: 16px;
+  margin-left: 16px;
+}
+.torta_text h6 span {
+  color: #06c6d8;
+}
+
+/* ========================= */
+/* PAGINA 4 - FEEDBACK */
+/* ========================= */
+
+.feedback-layout {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* stelle */
+
+#stars span {
+  margin-left: 10px;
+  display: inline-block;
+  font-size: 60px;
+  color: #ccc;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#stars .clicked {
+  color: #00ffff;
+}
+
+.page4footer {
+  justify-content: center;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#check {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#stars span.hovered {
+  transform: scale(1.4);
+}
