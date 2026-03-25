@@ -1,3 +1,29 @@
+//LOGICA PAGE 2
+// timer
+let contatore = null;
+let nrDomanda = document.querySelectorAll("footer p span");
+
+function avviaTimer() {
+  clearInterval(contatore);
+  let secondi = 30;
+  document.getElementById("numero").textContent = secondi;
+  document.getElementById("arco").style.strokeDashoffset = 283;
+  contatore = setInterval(function () {
+    secondi = secondi - 1 / 60;
+    document.getElementById("numero").textContent = Math.ceil(secondi);
+    let nascosto = (283 * secondi) / 30;
+    document.getElementById("arco").style.strokeDashoffset = nascosto;
+
+    if (secondi <= 0) {
+      clearInterval(contatore);
+      indice++;
+      nrDomanda[0].innerText = indice + 1;
+      mostraDomande();
+    }
+  }, 1000 / 60);
+}
+// fine timer
+//SCALA STELLINE
 const stars = document.querySelectorAll("#stars span");
 let savedIndex = -1;
 
@@ -16,29 +42,6 @@ stars.forEach((star, indice) => {
   });
 });
 // js per la parte delle stelle
-// timer
-let contatore = null;
-let nrDomanda = document.querySelectorAll("footer p span");
-function avviaTimer() {
-  clearInterval(contatore);
-  let secondi = 30;
-  document.getElementById("numero").textContent = secondi;
-  contatore = setInterval(function () {
-    secondi = secondi - 1;
-    document.getElementById("numero").textContent = secondi;
-    let nascosto = 283 - (283 * secondi) / 30;
-    document.getElementById("arco").style.strokeDashoffset = nascosto;
-
-    if (secondi <= 0) {
-      clearInterval(contatore);
-      indice++;
-      nrDomanda[0].innerText = indice + 1;
-      mostraDomande();
-    }
-  }, 1000);
-}
-// fine timer
-
 // inizio quiz
 const domande = [
   {
@@ -80,6 +83,11 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+    const nextPageBtn = document.createElement("a");
+    nextPageBtn.innerText += "See the next page";
+    nextPageBtn.classList.add("answer-btn", "next-page-btn");
+    nextPageBtn.setAttribute("href", "../page3/page3.html");
+    domanda.appendChild(nextPageBtn);
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
@@ -90,6 +98,7 @@ const mostraDomande = function (arr) {
   avviaTimer();
 
   //QUANTE DOMANDE ABBIAMO?
+  nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
   nrDomanda[1].innerText = `/ ${domande.length}`;
 
   //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
@@ -106,7 +115,7 @@ const mostraDomande = function (arr) {
       }
       indice++;
 
-      nrDomanda[0].innerText = indice + 1;
+      nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
 
       mostraDomande();
     };
