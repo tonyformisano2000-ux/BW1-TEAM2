@@ -72,7 +72,7 @@ const domande = [
   },
 ];
 let indice = 0;
-let punteggio = 4;
+let punteggio = 0;
 
 const domanda = document.querySelector(".quiz-layout h2");
 const bottoni = document.querySelectorAll(".answer-btn");
