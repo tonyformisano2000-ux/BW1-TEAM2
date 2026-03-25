@@ -31,7 +31,9 @@ header {
   display: flex;
   flex-direction: column;
 }
-
+/* .body .page {
+  margin: 0 100px;
+} */
 .Logo {
   width: 180px;
 }
@@ -327,9 +329,12 @@ input[type="checkbox"]:checked::after {
 /* stelle */
 
 #stars span {
+  margin-left: 10px;
+  display: inline-block;
   font-size: 60px;
-  color: #180240;
+  color: #ccc;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 #stars .clicked {
@@ -348,4 +353,8 @@ input[type="checkbox"]:checked::after {
 #check {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+#stars span.hovered {
+  transform: scale(1.4);
 }
