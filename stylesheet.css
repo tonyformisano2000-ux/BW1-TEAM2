@@ -179,6 +179,9 @@ input[type="checkbox"]:checked::after {
 .quiz-layout {
   text-align: center;
 }
+.quiz-layout h2 {
+  margin-top: 180px;
+}
 
 .page2footer {
   justify-content: center;
