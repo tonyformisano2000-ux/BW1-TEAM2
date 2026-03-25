@@ -82,6 +82,7 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+    localStorage.setItem("punteggio", punteggio);
     const nextPageBtn = document.createElement("a");
     nextPageBtn.innerText += "See the next page";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
@@ -122,5 +123,3 @@ const mostraDomande = function (arr) {
   });
 };
 mostraDomande();
-localStorage.setItem(`punteggio`, `${punteggio}`);
-// window.location.href = "./page3/page3.html";
