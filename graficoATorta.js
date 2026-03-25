@@ -18,8 +18,9 @@ const results = (voto) => {
   Wp.innerText = nEserciziSbagliati;
 
   const torte = document.getElementsByClassName("torta")[0];
-  torte.style.width = "250px";
-  torte.style.height = "250px";
+
+  torte.style.width = "350px";
+  torte.style.height = "350px";
   torte.style.borderRadius = "50%";
   torte.style.background = `conic-gradient(#d20094 0% ${percentualeRisposteSbagliate}%, #00ffff ${percentualeRisposteSbagliate}% 100%)`;
 
@@ -28,20 +29,25 @@ const results = (voto) => {
   torte.style.maskImage = maskRule;
   torte.style.boxShadow = "0 0 10px 10px gold";
 
-  let innerCircleTextH6 = document.querySelector(".torta>h6");
-  let innerCircleTextP = document.querySelector(".torta>p");
+  let innerCircleTextH6 = document.querySelector(".torta_text>h6");
+  let innerCircleTextP = document.querySelector(".torta_text>p");
 
   if (voto > 3) {
     innerCircleTextH6.innerHTML =
-      "Congratulations!<span><b>You passed the exam</b></span>";
-    innerCircleTextP.innerText =
-      "We'll send you the certificate in few minutes. Check your email.";
+      "Congratulations!<br><span><b>You passed the exam</b></span>";
+    innerCircleTextP.innerText = `We'll send you the certificate
+       in few minutes.
+        Check your email.`;
   } else {
-    innerCircleTextH6.innerHTML =
-      "Oops! <span><b>You failed the exam</b></span>";
-    innerCircleTextP.innerText = "Come back soon and try again, good luck!";
+    innerCircleTextH6.innerHTML = `Oops! 
+      <span>
+      <b>
+      You failed the exam</b>
+      </span>`;
+    innerCircleTextP.innerText = `Come back soon and try 
+     again, good luck!`;
   }
 };
 
-const punteggio = Number(localStorage.getItem("punteggio")) || 0;
+const punteggio = Number(localStorage.getItem("punteggio"));
 results(punteggio);

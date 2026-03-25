@@ -72,7 +72,7 @@ const domande = [
   },
 ];
 let indice = 0;
-let punteggio = 4;
+let punteggio = 0;
 
 const domanda = document.querySelector(".quiz-layout h2");
 const bottoni = document.querySelectorAll(".answer-btn");
@@ -92,7 +92,6 @@ const mostraDomande = function (arr) {
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
-    return punteggio;
   }
 
   //RESETTIAMO IL TIMER
