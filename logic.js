@@ -1,4 +1,4 @@
-//LOGICA PAGE 2
+// LOGICA PAGE 2
 // timer
 let contatore = null;
 let nrDomanda = document.querySelectorAll("footer p span");
@@ -71,7 +71,6 @@ const domande = [
     corretta: 3,
   },
 ];
-
 let indice = 0;
 let punteggio = 0;
 
@@ -83,21 +82,22 @@ const mostraDomande = function (arr) {
   // SE FINISCONO LE DOMANDE
   if (indice >= domande.length) {
     domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+    localStorage.setItem("punteggio", punteggio);
     const nextPageBtn = document.createElement("a");
     nextPageBtn.innerText += "See the next page";
     nextPageBtn.classList.add("answer-btn", "next-page-btn");
     nextPageBtn.setAttribute("href", "../page3/page3.html");
+
     domanda.appendChild(nextPageBtn);
     bottoni.forEach((bottone) => (bottone.style.display = "none"));
     document.querySelector(".timer").style.display = "none";
     document.querySelector("footer p").style.visibility = "hidden";
-    return;
   }
 
   //RESETTIAMO IL TIMER
   avviaTimer();
 
-  //QUANTE DOMANDE ABBIAMO?
+  // QUANTE DOMANDE ABBIAMO?
   nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
   nrDomanda[1].innerText = `/ ${domande.length}`;
 
@@ -120,6 +120,5 @@ const mostraDomande = function (arr) {
       mostraDomande();
     };
   });
-  return punteggio;
 };
 mostraDomande();
