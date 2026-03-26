@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinity Castle</title>
+
+    <link rel="stylesheet" href="../netflix-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .quiz-title,
+    .quiz-layout h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .fire-trail {
+    }
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(1) blur(0px);
+    }
+
+    .quiz-layout > div {
+      text-align: center;
+      margin-bottom: 1, 5rem;
+    }
+
+    .quiz-layout h2 {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: red;
+      opacity: 0.9;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .quiz-title {
+      font-size: 60px;
+      font-weight: 900;
+      margin: 0.3rem 0 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      background: linear-gradient(
+        90deg,
+        #f9e79f,
+        #f1c40f,
+        #d4ac0d,
+        #f1c40f,
+        #f9e79f
+      );
+
+      -webkit-background-clip: text;
+      color: transparent;
+
+      text-shadow:
+        0 0 8px rgba(255, 215, 0, 0.5),
+        0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    .quiz-question {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      margin-top: 1rem;
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .quiz-answer {
+      width: 100%;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border: 2px solid #ff4b9a;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .quiz-answer:hover {
+      background: #ff4b9a;
+      color: #000;
+      box-shadow: 0 0 15px #ff4b9a;
+      transform: scale(1.03);
+    }
+    .answer-btn {
+      width: 100%;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border-radius: 12px;
+      border: 2px solid #b300ff;
+      background: #200020;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      animation: demonPulse 1.8s infinite;
+    }
+
+    @keyframes demonPulse {
+      0% {
+        box-shadow: 0 0 10px #b300ff;
+      }
+      50% {
+        box-shadow: 0 0 30px #ff008c;
+      }
+      100% {
+        box-shadow: 0 0 10px #b300ff;
+      }
+    }
+    .correct {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: #000;
+      box-shadow: 0 0 15px #28a745;
+    }
+
+    .wrong {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: #000;
+      box-shadow: 0 0 15px #dc3545;
+    }
+  </style>
+  <body>
+    <video autoplay muted loop id="bg-video">
+      <source src="./Video castle 1.mp4" type="video/mp4" />
+    </video>
+    <header class="page2header">
+      <div>
+        <img class="Logo" src="../assets/image copy.png" alt="Logo" />
+      </div>
+      <div class="timer">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="sfondo" cx="60" cy="60" r="45" />
+          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+        </svg>
+
+        <div class="numero" id="numero"></div>
+      </div>
+    </header>
+    <div class="page">
+      <main class="quiz-layout">
+        <div>
+          <h2>KIMETSU NO YAiBA</h2>
+          <h1 id="quiz-title" class="quiz-title">INFINITY CASTLE</h1>
+          <h2>DEMON SLAYER</h2>
+          <h3 id="quiz-question" class="quiz-question"></h3>
+        </div>
+        <div class="answers">
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+        </div>
+      </main>
+      <footer class="page2footer">
+        <p>
+          <span></span>
+          <span> </span>
+          <span class="fucsia"> </span>
+        </p>
+      </footer>
+    </div>
+    <script>
+      document.addEventListener(
+        "click",
+        function () {
+          const video = document.getElementById("bg-video");
+          video.muted = false;
+          video.play();
+        },
+        { once: true },
+      );
+      // TIMER
+
+      let contatore = null;
+      let nrDomanda = document.querySelectorAll("footer p span");
+
+      function avviaTimer() {
+        clearInterval(contatore);
+
+        let secondi = 30;
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
+
+        contatore = setInterval(function () {
+          secondi--;
+          document.getElementById("numero").textContent = secondi;
+
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
+
+          if (secondi <= 0) {
+            clearInterval(contatore);
+            indice++;
+            mostraDomande();
+          }
+        }, 1000);
+      }
+
+      // DOMANDE CASTELLO INFINITO
+
+      const domande = [
+        {
+          domanda:
+            "Chi controlla e manipola il castello infinito con la sua arte del sangue demonico?",
+          risposte: ["Doma", "Akaza", "Nakime", "Kokushibo"],
+          corretta: 2,
+        },
+        {
+          domanda: "Chi affronta Zenitsu Agatsuma nel castello infinito?",
+          risposte: ["Akaza", "Doma", "Kaigaku", "Eyokko"],
+          corretta: 2,
+        },
+        {
+          domanda: "Per quale motivo il castello è considerato pericoloso?",
+          risposte: [
+            "Perchè è pieno di trappole meccaniche",
+            "Perchè è invaso da centinaia di Oni Minori",
+            "Perchè è immerso nell'oscurità totale",
+            "Perchè cambia forma continuamente",
+          ],
+          corretta: 3,
+        },
+        {
+          domanda:
+            "Quale tecnica usa Tanjiro per resistere agli attacchi devastanti della Upper Moon 3?",
+          risposte: [
+            "Nona forma: Fiori d'acqua fluttuanti",
+            "Nona forma: Danza calma-Onda scarlatta",
+            "Respirazione del Fuoco del Dio del Sole",
+            "Respirazione del tuono: Tuono lampeggiante",
+          ],
+          corretta: 2,
+        },
+      ];
+
+      let indice = 0;
+      let punteggio = 0;
+
+      // ELEMENTI DELLA PAGINA
+
+      const domandaEl = document.querySelector(".quiz-question");
+      const bottoni = document.querySelectorAll(".answer-btn");
+
+      // RESET TIMER
+      avviaTimer();
+
+      // MOSTRA DOMANDE
+
+      const mostraDomande = function () {
+        // SE FINISCONO LE DOMANDE
+        if (indice >= domande.length) {
+          domandaEl.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+          localStorage.setItem("punteggio", punteggio);
+
+          const nextPageBtn = document.createElement("a");
+          nextPageBtn.innerText = "See the result";
+          nextPageBtn.classList.add("answer-btn", "next-page-btn");
+          nextPageBtn.setAttribute("href", "");
+
+          domandaEl.appendChild(nextPageBtn);
+
+          bottoni.forEach((bottone) => (bottone.style.display = "none"));
+          document.querySelector(".timer").style.display = "none";
+          document.querySelector("footer p").style.visibility = "hidden";
+          return;
+        }
+
+        avviaTimer();
+
+        // NUMERO DOMANDA NEL FOOTER
+        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style=" color: red;">${domande.length}</span>`;
+
+        //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
+        domandaEl.innerText = domande[indice].domanda;
+
+        bottoni.forEach((btn) => {
+          btn.classList.remove("correct", "wrong");
+          btn.style.pointerEvents = "auto";
+        });
+
+        // MOSTRA RISPOSTE
+        bottoni.forEach((bottone, i) => {
+          bottone.innerText = domande[indice].risposte[i];
+
+          bottone.onclick = function () {
+            // Disabilita tutti i bottoni
+            bottoni.forEach((btn) => (btn.style.pointerEvents = "none"));
+
+            // Colora tutti i bottoni
+            bottoni.forEach((btn, index) => {
+              if (index === domande[indice].corretta) {
+                btn.classList.add("correct");
+              } else {
+                btn.classList.add("wrong");
+              }
+            });
+
+            if (i === domande[indice].corretta) {
+              punteggio++;
+            }
+
+            setTimeout(() => {
+              indice++;
+              mostraDomande();
+            }, 600);
+          };
+        });
+      };
+
+      mostraDomande();
+
+      const video = document.querySelector("#bg-video");
+      if (video) {
+        video.volume = 0.02;
+      }
+    </script>
+  </body>
+</html>
