@@ -338,6 +338,7 @@
 
       function mostraDomanda() {
         if (indice >= questions.length) {
+          localStorage.setItem("punteggio", punteggio);
           gsap.to(document.body, {
             duration: 1.5,
             opacity: 0,

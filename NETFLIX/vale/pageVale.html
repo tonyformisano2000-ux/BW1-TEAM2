@@ -118,27 +118,27 @@
     </div>
     <script>
       // timer
-      let contatore = null
-      let nrDomanda = document.querySelectorAll("footer p span")
+      let contatore = null;
+      let nrDomanda = document.querySelectorAll("footer p span");
 
       function avviaTimer() {
-        clearInterval(contatore)
-        let secondi = 30
-        document.getElementById("numero").textContent = secondi
-        document.getElementById("arco").style.strokeDashoffset = 283
+        clearInterval(contatore);
+        let secondi = 30;
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
         contatore = setInterval(function () {
-          secondi = secondi - 1
-          document.getElementById("numero").textContent = Math.ceil(secondi)
-          let nascosto = (283 * secondi) / 30
-          document.getElementById("arco").style.strokeDashoffset = nascosto
+          secondi = secondi - 1;
+          document.getElementById("numero").textContent = Math.ceil(secondi);
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
 
           if (secondi <= 0) {
-            clearInterval(contatore)
-            indice++
-            nrDomanda[0].innerText = indice + 1
-            mostraDomande()
+            clearInterval(contatore);
+            indice++;
+            nrDomanda[0].innerText = indice + 1;
+            mostraDomande();
           }
-        }, 1000)
+        }, 1000);
       }
 
       // inizio quiz
@@ -176,85 +176,85 @@
           risposte: ["Aang", "Sokka", "Katara", "Toph"],
           corretta: 3,
         },
-      ]
-      let indice = 0
-      let punteggio = 0
+      ];
+      let indice = 0;
+      let punteggio = 0;
 
-      const domanda = document.querySelector(".quiz-layout h2")
-      const bottoni = document.querySelectorAll(".answer-btn")
+      const domanda = document.querySelector(".quiz-layout h2");
+      const bottoni = document.querySelectorAll(".answer-btn");
 
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`
-          localStorage.setItem("punteggio", punteggio)
-          const nextPageBtn = document.createElement("a")
-          nextPageBtn.innerText += "See the result"
-          nextPageBtn.classList.add("answer-btn", "next-page-btn")
-          nextPageBtn.setAttribute("href", "../page3/page3.html")
+          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
 
-          domanda.appendChild(nextPageBtn)
-          bottoni.forEach((bottone) => (bottone.style.display = "none"))
-          document.querySelector(".timer").style.display = "none"
-          document.querySelector("footer p").style.visibility = "hidden"
+          const nextPageBtn = document.createElement("a");
+          nextPageBtn.innerText += "See the result";
+          nextPageBtn.classList.add("answer-btn", "next-page-btn");
+
+          domanda.appendChild(nextPageBtn);
+          bottoni.forEach((bottone) => (bottone.style.display = "none"));
+          document.querySelector(".timer").style.display = "none";
+          document.querySelector("footer p").style.visibility = "hidden";
         }
 
         //RESETTIAMO IL TIMER
-        avviaTimer()
+        avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`
-        nrDomanda[1].innerHTML = `/ <span style=" color: #bb8314;">${domande.length}</span>`
+        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style=" color: #bb8314;">${domande.length}</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
-        domanda.innerText = domande[indice].domanda
+        domanda.innerText = domande[indice].domanda;
 
         //MOSTRIAMO LE RISPOSTE CORRISPONDENTI
         bottoni.forEach((bottone, i) => {
-          bottone.innerText = domande[indice].risposte[i]
+          bottone.innerText = domande[indice].risposte[i];
 
           //AL CLICK FAI QUESTO
           bottone.onclick = function () {
             // disabilita tutti i bottoni per evitare spam click
-            bottoni.forEach((btn) => (btn.disabled = true))
+            bottoni.forEach((btn) => (btn.disabled = true));
 
             // risposta corretta
             if (i === domande[indice].corretta) {
-              bottone.classList.add("correct")
-              punteggio++
+              bottone.classList.add("correct");
+              punteggio++;
             } else {
-              bottone.classList.add("wrong")
+              bottone.classList.add("wrong");
 
               // evidenzia anche quella giusta
-              bottoni[domande[indice].corretta].classList.add("correct")
+              bottoni[domande[indice].corretta].classList.add("correct");
             }
 
             // aspetta 1 secondo prima di cambiare domanda
             setTimeout(() => {
               // reset classi
               bottoni.forEach((btn) => {
-                btn.classList.remove("correct", "wrong")
-                btn.disabled = false
-              })
+                btn.classList.remove("correct", "wrong");
+                btn.disabled = false;
+              });
 
-              indice++
-              mostraDomande()
-            }, 1000)
-          }
-        })
-      }
+              indice++;
+              mostraDomande();
+            }, 1000);
+          };
+        });
+      };
 
-      mostraDomande()
+      mostraDomande();
 
       // MUSICA
       window.addEventListener("load", () => {
-        const audio = document.getElementById("musicaAvatar")
-        audio.volume = 0.4
+        const audio = document.getElementById("musicaAvatar");
+        audio.volume = 0.4;
 
         audio.play().catch(() => {
-          window.addEventListener("click", () => audio.play(), { once: true })
-        })
-      })
+          window.addEventListener("click", () => audio.play(), { once: true });
+        });
+      });
+      const risultato = Number(localStorage.getItem("punteggio"));
     </script>
   </body>
 </html>
