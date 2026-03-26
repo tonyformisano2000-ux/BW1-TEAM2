@@ -116,6 +116,7 @@
         </p>
       </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       // timer
       let contatore = null;
@@ -186,16 +187,32 @@
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+          const overlay = document.createElement("div");
+          overlay.style.position = "fixed";
+          overlay.style.bottom = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "0";
+          overlay.style.backgroundColor = "#3498db";
+          overlay.style.zIndex = "9999";
+          document.body.appendChild(overlay);
 
-          const nextPageBtn = document.createElement("a");
-          nextPageBtn.innerText += "See the result";
-          nextPageBtn.classList.add("answer-btn", "next-page-btn");
+          gsap.to(overlay, {
+            duration: 1,
+            height: "100%",
+            ease: "power2.inOut",
+            onComplete: () => {
+              window.location.href = "../demonSlayer/Slayer.html";
+            },
+          });
 
-          domanda.appendChild(nextPageBtn);
-          bottoni.forEach((bottone) => (bottone.style.display = "none"));
-          document.querySelector(".timer").style.display = "none";
-          document.querySelector("footer p").style.visibility = "hidden";
+          gsap.to(document.body, {
+            duration: 0.6,
+            opacity: 0,
+            ease: "power2.inOut",
+          });
+
+          return;
         }
 
         //RESETTIAMO IL TIMER
