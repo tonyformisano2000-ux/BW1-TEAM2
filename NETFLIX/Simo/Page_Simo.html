@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netflix Theme</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        background: #000;
+        overflow-x: hidden;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: black;
+        height: 154px;
+        padding: 0 50px;
+        font-size: 3rem;
+        font-weight: 900;
+        color: #e50914;
+        letter-spacing: 3px;
+        text-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+      }
+
+      main {
+        margin: auto;
+        max-width: 55%;
+        height: 760px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+
+      h1 {
+        margin-bottom: 70px;
+        font-size: 2.4rem;
+        font-weight: 900;
+        text-align: center;
+        letter-spacing: 2px;
+        color: #e8d48a;
+        font-family: "Cinzel", serif;
+        text-shadow:
+          0 0 25px rgba(201, 168, 76, 0.5),
+          0 0 50px rgba(229, 9, 20, 0.2);
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        perspective: 1000px;
+      }
+
+      .glass {
+        width: 300px;
+        height: 400px;
+        background: rgba(10, 7, 3, 0.6);
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        border-radius: 6px;
+        backdrop-filter: blur(12px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition: 0.4s ease;
+        transform: rotateY(var(--r));
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(201, 168, 76, 0.08);
+        position: relative;
+        cursor: pointer;
+      }
+
+      .glass.correct {
+        border: 3px solid #2ecc71 !important;
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.5) !important;
+      }
+
+      .glass.wrong {
+        border: 3px solid #e74c3c !important;
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.5) !important;
+      }
+
+      .glass::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        border-top: 1.5px solid rgba(201, 168, 76, 0.5);
+        border-left: 1.5px solid rgba(201, 168, 76, 0.5);
+        z-index: 2;
+      }
+
+      .glass::after {
+        content: "";
+        position: absolute;
+        bottom: 54px;
+        right: 0;
+        width: 18px;
+        height: 18px;
+        border-bottom: 1.5px solid rgba(201, 168, 76, 0.5);
+        border-right: 1.5px solid rgba(201, 168, 76, 0.5);
+        z-index: 2;
+      }
+
+      .img-box {
+        width: 100%;
+        height: 82%;
+        overflow: hidden;
+      }
+
+      .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.85;
+        transition: 0.4s ease;
+        filter: sepia(0.2) contrast(1.05);
+      }
+
+      .label {
+        height: 18%;
+        width: 100%;
+        background: rgba(5, 3, 1, 0.8);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.88rem;
+        color: #c9a84c;
+      }
+
+      .glass:hover {
+        transform: rotateY(0deg) scale(1.06);
+        box-shadow:
+          0 0 30px rgba(201, 168, 76, 0.3),
+          0 20px 40px rgba(0, 0, 0, 0.7);
+        border-color: rgba(201, 168, 76, 0.55);
+      }
+
+      .glass:hover img {
+        transform: scale(1.05);
+        opacity: 1;
+        filter: sepia(0.05) contrast(1.08);
+      }
+
+      .bordo {
+        fill: none;
+        stroke: #000000;
+        stroke-width: 10;
+        stroke-dasharray: 283;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 0.9s linear;
+        transform: rotate(-90deg);
+        transform-origin: center;
+      }
+
+      .sfondo {
+        fill: none;
+        stroke: #e8d48a;
+        stroke-width: 10;
+      }
+
+      .timer {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #numero {
+        color: white;
+        position: absolute;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .bg-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+        opacity: 0.35;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      NETFLIX
+      <div>
+        <img style="width: 300px" src="./img/logo_thrones.jpg" alt="" />
+      </div>
+      <div class="timer">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="sfondo" cx="60" cy="60" r="45" />
+          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+        </svg>
+        <div class="numero" id="numero"></div>
+      </div>
+    </header>
+
+    <main>
+      <video class="bg-video" autoplay loop playsinline>
+        <source src="./img/game_of_thrones.mp4" type="video/mp4" />
+      </video>
+      <h1>Domanda del Quiz</h1>
+
+      <div class="container">
+        <div class="glass" style="--r: -25deg">
+          <div class="img-box">
+            <img src="./snow.jpg" alt="" />
+          </div>
+          <div class="label">1</div>
+        </div>
+
+        <div class="glass" style="--r: 10deg">
+          <div class="img-box">
+            <img src="./snow.jpg" alt="" />
+          </div>
+          <div class="label">2</div>
+        </div>
+
+        <div class="glass" style="--r: 25deg">
+          <div class="img-box">
+            <img src="./snow.jpg" alt="" />
+          </div>
+          <div class="label">3</div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // timer
+      let contatore = null;
+
+      function avviaTimer() {
+        clearInterval(contatore);
+        let secondi = 30;
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
+        contatore = setInterval(function () {
+          secondi = secondi - 1;
+          document.getElementById("numero").textContent = Math.ceil(secondi);
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
+
+          if (secondi <= 0) {
+            clearInterval(contatore);
+            if (!attesa) {
+              attesa = true;
+
+              cards.forEach((card) => {
+                card.style.pointerEvents = "none";
+              });
+
+              setTimeout(() => {
+                indice++;
+                mostraDomanda();
+              }, 500);
+            }
+          }
+        }, 1000);
+      }
+      // fine timer
+      const questions = [
+        {
+          question: "What animal is the symbol of House Stark?",
+          answers: [
+            { img: "./img/Wolf.jpg", label: "Direwolf" },
+            { img: "./img/lion.jpg", label: "Lion" },
+            { img: "./img/dragon.jpg", label: "Dragon" },
+          ],
+          correct: 0,
+        },
+        {
+          question: "What is the motto of House Lannister?",
+          answers: [
+            { img: "./img/Game_of_thrones.jpg", label: "Winter is Coming" },
+            { img: "./img/lannistar.jpg", label: "Hear Me Roar" },
+            { img: "./img/Targarian.jpg", label: "Fire and Blood" },
+          ],
+          correct: 1,
+        },
+        {
+          question: "What is the seat of House Baratheon?",
+          answers: [
+            { img: "./img/winterfell.jpg", label: "Winterfell" },
+            { img: "./img/Casterly_Rock.jpg", label: "Casterly Rock" },
+            { img: "./img/Storm_End.jpg", label: "Storm's End" },
+          ],
+          correct: 2,
+        },
+        {
+          question: "Who killed the Mad King Aerys II Targaryen?",
+          answers: [
+            { img: "./img/Eddard Stark.jpg", label: "Ned Stark" },
+            { img: "./img/Jaime Lannister.jpg", label: "Jaime Lannister" },
+            { img: "./img/Robert Baratheon.jpg", label: "Robert Baratheon" },
+          ],
+          correct: 1,
+        },
+      ];
+
+      let indice = 0;
+      let punteggio = 0;
+      let attesa = false;
+
+      const titleH1 = document.querySelector("main h1");
+      const cards = document.querySelectorAll(".glass");
+      const container = document.querySelector(".container");
+
+      function mostraDomanda() {
+        if (indice >= questions.length) {
+          window.location.href = "Page_Simo.html";
+          return;
+        }
+
+        const q = questions[indice];
+        titleH1.textContent = q.question;
+
+        cards.forEach((card, i) => {
+          const imgEl = card.querySelector(".img-box img");
+          const labelEl = card.querySelector(".label");
+
+          imgEl.src = q.answers[i].img;
+          imgEl.alt = q.answers[i].label;
+          labelEl.textContent = q.answers[i].label;
+
+          card.style.border = "1px solid rgba(201, 168, 76, 0.25)";
+          card.style.pointerEvents = "auto";
+          card.classList.remove("correct", "wrong");
+        });
+        attesa = false;
+        avviaTimer();
+      }
+
+      function gestisciRisposta(i) {
+        if (attesa) return;
+        attesa = true;
+
+        const q = questions[indice];
+        const cardSelezionata = cards[i];
+
+        if (i === q.correct) {
+          cardSelezionata.classList.add("correct");
+          punteggio++;
+        } else {
+          cardSelezionata.classList.add("wrong");
+          cards[q.correct].classList.add("correct");
+        }
+
+        clearInterval(contatore);
+
+        cards.forEach((card) => {
+          card.style.pointerEvents = "none";
+        });
+
+        setTimeout(() => {
+          indice++;
+          mostraDomanda();
+        }, 1000);
+      }
+
+      container.addEventListener("click", (e) => {
+        const card = e.target.closest(".glass");
+        if (!card) return;
+        if (attesa) return;
+        const index = [...cards].indexOf(card);
+        gestisciRisposta(index);
+      });
+
+      mostraDomanda();
+
+      const bgVideo = document.querySelector(".bg-video");
+
+      if (bgVideo) {
+        bgVideo.volume = 0.005;
+      }
+
+      document.addEventListener(
+        "click",
+        () => {
+          if (bgVideo && bgVideo.paused) {
+            bgVideo.play();
+          }
+        },
+        { once: true },
+      );
+    </script>
+  </body>
+</html>
