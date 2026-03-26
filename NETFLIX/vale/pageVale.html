@@ -22,11 +22,12 @@
         font-style: normal;
       }
 
-      body{
+      body {
         cursor: url("./boomerang.png"), auto;
-        cursor: url("./boomerang.png") 16 16, auto;
-}
-      
+        cursor:
+          url("./boomerang.png") 16 16,
+          auto;
+      }
 
       body::before {
         background-image: url(./avatar\ wallpaper1.jpg);
@@ -81,6 +82,7 @@
     </style>
   </head>
   <body>
+    <audio id="musicaAvatar" src="./AvatarSoundtrack.mp3" autoplay loop></audio>
     <header class="page2header">
       <div>
         <img class="Logo" src="../assets/image copy.png" alt="Logo" />
@@ -180,7 +182,6 @@
 
       const domanda = document.querySelector(".quiz-layout h2")
       const bottoni = document.querySelectorAll(".answer-btn")
-      avviaTimer()
 
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
@@ -214,18 +215,46 @@
 
           //AL CLICK FAI QUESTO
           bottone.onclick = function () {
+            // disabilita tutti i bottoni per evitare spam click
+            bottoni.forEach((btn) => (btn.disabled = true))
+
+            // risposta corretta
             if (i === domande[indice].corretta) {
+              bottone.classList.add("correct")
               punteggio++
+            } else {
+              bottone.classList.add("wrong")
+
+              // evidenzia anche quella giusta
+              bottoni[domande[indice].corretta].classList.add("correct")
             }
-            indice++
 
-            nrDomanda[0].innerText = `QUESTION  ${indice + 1}`
+            // aspetta 1 secondo prima di cambiare domanda
+            setTimeout(() => {
+              // reset classi
+              bottoni.forEach((btn) => {
+                btn.classList.remove("correct", "wrong")
+                btn.disabled = false
+              })
 
-            mostraDomande()
+              indice++
+              mostraDomande()
+            }, 1000)
           }
         })
       }
+
       mostraDomande()
+
+      // MUSICA
+      window.addEventListener("load", () => {
+        const audio = document.getElementById("musicaAvatar")
+        audio.volume = 0.4
+
+        audio.play().catch(() => {
+          window.addEventListener("click", () => audio.play(), { once: true })
+        })
+      })
     </script>
   </body>
 </html>
