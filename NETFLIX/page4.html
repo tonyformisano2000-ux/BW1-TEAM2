@@ -4,41 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../stylesheet.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./netflix-style.css" />
   </head>
   <body>
-    <div class="page">
-    <header>
+    <header class="page4header">
       <div>
-        <img class="Logo" src="../Page1/epicode_logo.png" alt="Logo" />
+        <img class="Logo" src="./assets/image copy.png" alt="Logo" />
       </div>
     </header>
-    <main class="feedback-layout">
-      <h2><span>Tell us how it's going</span></h2>
-      <h3>
-        From 0 to 10, how likely are you to recommend EPICODE to a friend or a
-        collegue
-      </h3>
-      <div id="stars">
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-        <span class="clicked">★</span>
-      </div>
-      <h3>Leave us an open feedback about your experience so far</h3>
-      <input id="commentInput" placeholder="Write your comment here" />
-    </main>
-    <footer class="page4footer">
-      <button id="sendBtn" class="button" disabled>MORE INFO</button>
-    </footer>
-    <script src="../logic.js"></script>
+    <div class="page">
+      <main class="feedback-layout">
+        <h2><span>Dicci quanto ti é piaciuto!</span></h2>
+        <h3>Da 0 a 10 quanto ti sei divertito sostenendo questo quiz?</h3>
+        <div id="stars">
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+          <span class="clicked">★</span>
+        </div>
+        <h3>Lasciaci la tua opinione (solo cose belle)</h3>
+        <input id="commentInput" placeholder="Write your comment here" />
+      </main>
+      <footer class="page4footer">
+        <button id="sendBtn" class="button" disabled>MORE INFO</button>
+      </footer>
+      <script src="../logic.js"></script>
+    </div>
   </body>
 </html>
