@@ -12,7 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="./biagio-style.css" /> -->
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Trispace:wght@100..800&display=swap");
       @font-face {
@@ -95,7 +94,6 @@
         background-size: 100% 100%;
         display: flex;
         justify-content: center;
-        transition: all 3s ease-in-out;
       }
       main {
         border: 1px solid black;
@@ -205,14 +203,6 @@
         color: black;
       }
 
-      .sbagliata {
-        background-color: #e50914;
-        color: white;
-      }
-      .corretta {
-        background-color: green;
-        color: white;
-      }
       footer {
         background-color: black;
         padding: 1em 0;
@@ -239,14 +229,10 @@
           <circle class="sfondo" cx="60" cy="60" r="45" />
           <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
         </svg>
+
         <div class="numero" id="numero"></div>
       </div>
     </header>
-    <audio
-      id="audio-traccia"
-      src="./audio/Breaking Bad Main Title Theme (Extended) - Dave Porter.mp3"
-      .
-    ></audio>
     <div class="page">
       <main class="quiz-layout">
         <div id="h2-wrapper">
@@ -285,10 +271,6 @@
       <img src="./immagini-biagio/simbolochimico1.png" alt="" />
     </footer>
     <script>
-      document.addEventListener("click", function () {
-        const audio = document.getElementById("audio-traccia");
-        audio.play();
-      });
       const backgrounds = [
         `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
     url(./immagini-biagio/bg1.jpeg)`,
@@ -398,7 +380,6 @@
           correct: "In un camper",
         },
       ];
-
       let contatore = null;
       let nrDomanda = document.querySelectorAll(".punteggio-counter p span");
 
@@ -426,7 +407,6 @@
       let punteggio = 0;
       let answersGiven = [];
 
-      //BOTTONE PER TORNARE INDIETRO ANCHE SE NON SERVE
       const backBtn = document.getElementById("back-btn");
       backBtn.addEventListener("click", function () {
         if (indice > 0) {
@@ -436,11 +416,9 @@
             punteggio--;
             console.log(punteggio);
           }
-          // document.querySelector(".page").style.backgroundImage =
-          //   backgrounds[Math.ceil(Math.random() * 9)];
           document.querySelector(".page").style.backgroundImage =
-            backgrounds[indice];
-          // avviaTimer();
+            backgrounds[Math.ceil(Math.random() * 9)];
+          avviaTimer();
           mostraDomande();
         }
         // backBtn.disabled = indice === 0;
@@ -458,7 +436,7 @@
           domanda.style.fontFamily = '"Montserrat" , sans-serif';
           localStorage.setItem("punteggio", punteggio);
           backBtn.style.display = "none";
-          //CREA BOTTONE PER IRCARICARE LA PAGINA
+
           if (!document.querySelector(".reload-page-btn")) {
             const reloadBtn = document.createElement("button");
             reloadBtn.innerText += "Try the quiz again";
@@ -466,7 +444,6 @@
             document.querySelector(".end-btn-wrapper").appendChild(reloadBtn);
             reloadBtn.onclick = () => location.reload();
           }
-          //CREA IL BOTTONE PER LA PROSSIMA PAGINA
           if (!document.querySelector(".next-page-btn")) {
             const nextPageBtn = document.createElement("a");
             nextPageBtn.innerText += "See the result";
@@ -481,7 +458,22 @@
             "hidden";
           return;
         }
+        const badFeedback = document.querySelector(".sbagliata");
+        const goodFeedback = document.querySelector(".corretta");
 
+        const giveBadFeedback = function () {
+          badFeedback.style.display = "block";
+
+          setTimeout(() => {
+            badFeedback.style.display = "none";
+          }, 2000);
+        };
+        const giveGoodFeedback = function () {
+          goodFeedback.style.display = "block";
+          setTimeout(() => {
+            goodFeedback.style.display = "none";
+          });
+        };
         //RESETTIAMO IL TIMER
         avviaTimer();
 
@@ -504,45 +496,26 @@
 
           //AL CLICK FAI QUESTO
           bottone.onclick = function () {
-            //AZZERA IL CONTATORE
-            clearInterval(contatore);
             const correctAnswer =
               bottone.innerText === breakingBadQuestions[indice].correct;
 
-            const correct = breakingBadQuestions[indice].correct;
-            //DISABILITA I BOTTONI
-            bottoni.forEach((btn) => (btn.disabled = true));
-            //AGGIUNGE LA CLASSE CORRETTA A SECONDA CHE SIA SBAGLIATA O ESATTA
-            bottoni.forEach((btn) => {
-              if (btn.innerText === correct) {
-                btn.classList.add("corretta");
-              } else {
-                btn.classList.add("sbagliata");
-              }
-            });
-            //RACCOGLIAMO LE RISPOSTE CORRETTE IN UN ARRAY
             answersGiven[indice] = correctAnswer;
-            //SE LA RISPOSTA ERA GIUSTA INCREMENTIAMO IL PUNTEGGIO
+
             if (correctAnswer) {
+              giveGoodFeedback();
               punteggio++;
               console.log(punteggio);
+            } else {
+              giveBadFeedback();
             }
-            //UNA PAUSA DI 2 SECONDI PRIMA DI MOSTRARE LA PROSSIMA DOMANDA
-            setTimeout(() => {
-              indice++;
-              //RIMUOVIAMO LE CLASSI AI BOTTONI , CHE VERRANO RIASSEGNATE AL PROSSIMO GIRO
-              bottoni.forEach((btn) => {
-                btn.classList.remove("sbagliata", "corretta");
-                btn.disabled = false;
-              });
-              mostraDomande();
-            }, 2000);
-            //IL NUMERINO DELLA DOMANDA CORRISPONDENTE SOTTO SI AGGIORNA
+            indice++;
             nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            mostraDomande();
           };
         });
       };
       mostraDomande();
     </script>
+    <!-- <script src="../NETFLIX/quiz.js"></script> -->
   </body>
 </html>
