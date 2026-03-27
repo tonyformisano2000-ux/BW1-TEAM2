@@ -202,7 +202,7 @@
       }
 
       .page2footer {
-        display: inline-block;
+        display: flex;
         border-radius: 10px;
         background-color: rgba(101, 101, 101, 0.8);
         margin: 20px auto;
@@ -212,17 +212,22 @@
       .page2footer p {
         display: inline-block;
       }
-      a {
-        visibility: hidden;
+
+      .stickerCorrect {
+        filter: drop-shadow(0 0 12px rgb(128, 255, 0));
+        margin-left: 10px;
+      }
+      .stickerWrong {
+        filter: drop-shadow(0 0 12px rgb(255, 0, 0));
+        margin-left: 10px;
       }
     </style>
   </head>
   <!-- -------------------------------------------------------------------------HTML--------------------------------------------------------------------- -->
   <body>
-    <video width="100%vp" height="100%vp" autoplay>
+    <video class="video" width="100%vp" height="100%vp" autoplay>
       <source src="./intro quiz.mp4" />
     </video>
-    <a href=".page2footer"></a>
 
     <div class="positive">
       <audio id="waba">
@@ -435,13 +440,14 @@
 
           //AL CLICK FAI QUESTO
           bottone.onclick = function () {
-            if (i === domande[indice].corretta) {
+            if (i === domande[indice].corretta - 1) {
               punteggio++;
               const trueFalse = document.querySelector(".page2footer");
               const getSwifty = document.createElement("img");
               getSwifty.src =
                 "./get-schwifty-clip-art-illustration-smile-cartoon-rick-and-morty-portal-76d609b09e14a451a1c3882e61bc81d3.png";
               getSwifty.style.height = "30px";
+              getSwifty.classList.add("stickerCorrect");
               trueFalse.appendChild(getSwifty);
               const audio = document.querySelector(
                 `.positive audio:nth-of-type(${xAudio})`,
@@ -453,7 +459,7 @@
               const wrong = document.createElement("img");
               wrong.src = "./alien.png";
               wrong.style.height = "30px";
-              wrong.style.margin = "10px 5px";
+              wrong.classList.add("stickerWrong");
               trueFalse.appendChild(wrong);
               const audio = document.querySelector(
                 `.negative audio:nth-of-type(${yAudio})`,
@@ -461,15 +467,6 @@
               yAudio++;
               audio.play();
             }
-            const video = document.getElementsByTagName("video")[0];
-            console.log(video);
-            video.addEventListener("click", () => {
-              video.play();
-            });
-            const a = document.querySelector("a");
-            video.addEventListener("ended", function () {
-              a.click();
-            });
             indice++;
 
             nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
@@ -478,6 +475,10 @@
           };
         });
       };
+      const video = document.querySelector(".video");
+      video.addEventListener("click", () => {
+        video.play();
+      });
       mostraDomande();
     </script>
   </body>
