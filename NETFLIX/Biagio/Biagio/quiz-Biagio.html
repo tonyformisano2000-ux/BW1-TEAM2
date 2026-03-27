@@ -101,6 +101,7 @@
         border: 1px solid black;
         width: 60%;
         max-width: 900px;
+        height: fit-content;
         margin: 10em 0;
         border-radius: 20px;
         box-shadow: 2px 2px 10px 2px black;
@@ -182,10 +183,12 @@
 
       .end-btn-wrapper {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+        align-items: center;
       }
 
       .btn {
+        margin-top: 2em;
         text-align: center;
         text-decoration: none;
         color: blue;
@@ -267,9 +270,9 @@
           <button class="answer-btn">sdf</button>
           <button class="answer-btn">dsfdsf</button>
         </div>
-        <div>
+        <!-- <div>
           <button id="back-btn">Vedi domanda precedente</button>
-        </div>
+        </div> -->
         <div class="punteggio-counter">
           <p>
             <span>DOMANDA</span>
@@ -287,6 +290,7 @@
     <script>
       document.addEventListener("click", function () {
         const audio = document.getElementById("audio-traccia");
+        audio.volume = 0.1;
         audio.play();
       });
       const backgrounds = [
@@ -427,24 +431,24 @@
       let answersGiven = [];
 
       //BOTTONE PER TORNARE INDIETRO ANCHE SE NON SERVE
-      const backBtn = document.getElementById("back-btn");
-      backBtn.addEventListener("click", function () {
-        if (indice > 0) {
-          indice--;
+      // const backBtn = document.getElementById("back-btn");
+      // backBtn.addEventListener("click", function () {
+      //   if (indice > 0) {
+      //     indice--;
 
-          if (answersGiven[indice] === true) {
-            punteggio--;
-            console.log(punteggio);
-          }
-          // document.querySelector(".page").style.backgroundImage =
-          //   backgrounds[Math.ceil(Math.random() * 9)];
-          document.querySelector(".page").style.backgroundImage =
-            backgrounds[indice];
-          // avviaTimer();
-          mostraDomande();
-        }
-        // backBtn.disabled = indice === 0;
-      });
+      //     if (answersGiven[indice] === true) {
+      //       punteggio--;
+      //       console.log(punteggio);
+      //     }
+      //     // document.querySelector(".page").style.backgroundImage =
+      //     //   backgrounds[Math.ceil(Math.random() * 9)];
+      //     document.querySelector(".page").style.backgroundImage =
+      //       backgrounds[indice];
+      //     // avviaTimer();
+      //     mostraDomande();
+      //   }
+      //   // backBtn.disabled = indice === 0;
+      // });
 
       const domanda = document.querySelector(".quiz-layout h2");
       const bottoni = document.querySelectorAll(".answer-btn");
@@ -454,22 +458,25 @@
         // SE FINISCONO LE DOMANDE
         if (indice >= breakingBadQuestions.length) {
           clearInterval(contatore);
-          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
-          domanda.style.fontFamily = '"Montserrat" , sans-serif';
           localStorage.setItem("punteggio", punteggio);
-          backBtn.style.display = "none";
+          domanda.style.display = "none";
+          document.querySelector(".punteggio-counter").style.display = "none";
+          // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
+          // domanda.style.fontFamily = '"Montserrat" , sans-serif';
+          // backBtn.style.display = "none";
+
           //CREA BOTTONE PER IRCARICARE LA PAGINA
-          if (!document.querySelector(".reload-page-btn")) {
-            const reloadBtn = document.createElement("button");
-            reloadBtn.innerText += "Try the quiz again";
-            reloadBtn.classList.add("answer-btn", "btn");
-            document.querySelector(".end-btn-wrapper").appendChild(reloadBtn);
-            reloadBtn.onclick = () => location.reload();
-          }
+          // if (!document.querySelector(".reload-page-btn")) {
+          //   const reloadBtn = document.createElement("button");
+          //   reloadBtn.innerText += "Try the quiz again";
+          //   reloadBtn.classList.add("answer-btn", "btn");
+          //   document.querySelector(".end-btn-wrapper").appendChild(reloadBtn);
+          //   reloadBtn.onclick = () => location.reload();
+          // }
           //CREA IL BOTTONE PER LA PROSSIMA PAGINA
           if (!document.querySelector(".next-page-btn")) {
             const nextPageBtn = document.createElement("a");
-            nextPageBtn.innerText += "See the result";
+            nextPageBtn.innerText = "Go to the next page";
             nextPageBtn.classList.add("answer-btn", "btn");
             nextPageBtn.setAttribute("href", "../page3/page3.html");
             document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
