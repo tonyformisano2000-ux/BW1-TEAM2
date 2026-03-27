@@ -370,24 +370,13 @@
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 4);
 
-          const bgVideo = document.querySelector(".bg-video");
-          if (bgVideo) {
-            gsap.to(bgVideo, { duration: 0.3, volume: 0 });
-            bgVideo.pause();
-          }
-
-          preload.style.visibility = "visible";
-
           gsap.to(document.body, {
             duration: 0.7,
             x: "-100vw",
             ease: "power3.inOut",
-          });
-
-          gsap.to(preload, {
-            duration: 0.7,
-            left: "0%",
-            ease: "power3.inOut",
+            onComplete: () => {
+              window.location.href = "../vale/pageVale.html";
+            },
           });
 
           return;
