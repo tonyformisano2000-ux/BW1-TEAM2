@@ -22,6 +22,37 @@
         font-style: normal;
       }
 
+      #videoContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .click-hint {
+        position: absolute;
+        bottom: 40px;
+        color: white;
+        font-size: 18px;
+        opacity: 0.7;
+      }
+
+      /* nascondi il quiz allínizio */
+      #quiz {
+        display: none;
+      }
+
+      video {
+        max-width: 90%;
+      }
+
       body {
         cursor: url("./boomerang.png"), auto;
         cursor:
@@ -79,71 +110,128 @@
       .wrong {
         background: #e74c3c;
       }
+
+      .avatarLogo {
+        width: 250px;
+      }
     </style>
   </head>
   <body>
-    <audio id="musicaAvatar" src="./AvatarSoundtrack.mp3" autoplay loop></audio>
-    <header class="page2header">
-      <div>
-        <img class="Logo" src="../assets/image copy.png" alt="Logo" />
-      </div>
-      <div class="timer">
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          <circle class="sfondo" cx="60" cy="60" r="45" />
-          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
-        </svg>
+    <div id="videoContainer">
+      <video id="introVideo" playsinline>
+        <source src="./AvatarIntro.mp4" type="video/mp4" />
+      </video>
 
-        <div class="numero" id="numero"></div>
-      </div>
-    </header>
-    <div class="page">
-      <main class="quiz-layout">
+      <p class="click-hint">Click to start</p>
+    </div>
+
+    <div id="quiz">
+      <audio id="musicaAvatar" src="./AvatarSoundtrack.mp3" loop></audio>
+      <header class="page2header">
         <div>
-          <h2><!--DOMANDA--></h2>
+          <img class="Logo" src="../assets/image copy.png" alt="Logo" />
         </div>
-        <div class="answers">
-          <button class="answer-btn"></button>
-          <button class="answer-btn"></button>
-          <button class="answer-btn"></button>
-          <button class="answer-btn"></button>
+        <div>
+          <img class="avatarLogo" src="./avatarLogo.png" alt="avatar logo" />
         </div>
-      </main>
-      <footer class="page2footer">
-        <p>
-          <span></span>
-          <span> </span>
-          <span class="fucsia"> </span>
-        </p>
-      </footer>
+        <div class="timer">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="sfondo" cx="60" cy="60" r="45" />
+            <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+          </svg>
+
+          <div class="numero" id="numero"></div>
+        </div>
+      </header>
+      <div class="page">
+        <main class="quiz-layout">
+          <div>
+            <h2><!--DOMANDA--></h2>
+          </div>
+          <div class="answers">
+            <button class="answer-btn"></button>
+            <button class="answer-btn"></button>
+            <button class="answer-btn"></button>
+            <button class="answer-btn"></button>
+          </div>
+        </main>
+        <footer class="page2footer">
+          <p>
+            <span></span>
+            <span> </span>
+            <span class="fucsia"> </span>
+          </p>
+        </footer>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-      // timer
-      let contatore = null;
-      let nrDomanda = document.querySelectorAll("footer p span");
+      // ELEMENTI VIDEO + QUIZ
+
+      const video = document.getElementById("introVideo")
+      const container = document.getElementById("videoContainer")
+      const quiz = document.getElementById("quiz")
+      const audio = document.getElementById("musicaAvatar")
+
+      // Avvio video al click
+      container.addEventListener(
+        "click",
+        function () {
+          video.volume = 0.2
+          video.play()
+          // nascondi il testo dopo il click
+          document.querySelector(".click-hint")?.remove()
+        },
+        { once: true },
+      )
+
+      // Quando finisce il video
+      video.addEventListener("ended", function () {
+        // musica dopo tot secondi
+        setTimeout(() => {
+          audio.volume = 0.03
+          audio.play().catch(() => {})
+        }, 900)
+
+        //quiz dopo tot secondi
+        setTimeout(() => {
+          container.style.display = "none"
+          quiz.style.display = "block"
+
+          mostraDomande()
+        }, 2500)
+      })
+
+      // TIMER
+      let contatore = null
+      let nrDomanda = document.querySelectorAll("footer p span")
 
       function avviaTimer() {
-        clearInterval(contatore);
-        let secondi = 30;
-        document.getElementById("numero").textContent = secondi;
-        document.getElementById("arco").style.strokeDashoffset = 283;
+        clearInterval(contatore)
+        let secondi = 30
+
+        document.getElementById("numero").textContent = secondi
+        document.getElementById("arco").style.strokeDashoffset = 283
+
         contatore = setInterval(function () {
-          secondi = secondi - 1;
-          document.getElementById("numero").textContent = Math.ceil(secondi);
-          let nascosto = (283 * secondi) / 30;
-          document.getElementById("arco").style.strokeDashoffset = nascosto;
+          secondi--
+
+          document.getElementById("numero").textContent = Math.ceil(secondi)
+
+          let nascosto = (283 * secondi) / 30
+          document.getElementById("arco").style.strokeDashoffset = nascosto
 
           if (secondi <= 0) {
-            clearInterval(contatore);
-            indice++;
-            indiceGlobale++;
-            mostraDomande();
+            clearInterval(contatore)
+            indice++
+            indiceGlobale++
+            mostraDomande()
           }
-        }, 1000);
+        }, 1000)
       }
 
-      // inizio quiz
-      // domande vale//
+      // DOMANDE VALE
+
       const domande = [
         {
           domanda: "Qual e' il tipo di te' preferito di Zio Iroh?",
@@ -177,111 +265,90 @@
           risposte: ["Aang", "Sokka", "Katara", "Toph"],
           corretta: 3,
         },
-      ];
-      let indice = 0;
-      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
-      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4;
-      const domanda = document.querySelector(".quiz-layout h2");
-      const bottoni = document.querySelectorAll(".answer-btn");
+      ]
 
-      const mostraDomande = function (arr) {
-        // SE FINISCONO LE DOMANDE
+      let indice = 0
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4
+
+      const domanda = document.querySelector(".quiz-layout h2")
+      const bottoni = document.querySelectorAll(".answer-btn")
+
+      //  MOSTRA DOMANDE
+
+      function mostraDomande() {
+        // fine quiz
         if (indice >= domande.length) {
-          localStorage.setItem("punteggioTotale", punteggio);
-          localStorage.setItem("indiceGlobale", 8);
-          const overlay = document.createElement("div");
-          overlay.style.position = "fixed";
-          overlay.style.bottom = "0";
-          overlay.style.left = "0";
-          overlay.style.width = "100%";
-          overlay.style.height = "0";
-          overlay.style.backgroundColor = "#3498db";
-          overlay.style.zIndex = "9999";
-          document.body.appendChild(overlay);
+          localStorage.setItem("punteggioTotale", punteggio)
+          localStorage.setItem("indiceGlobale", 8)
+
+          const overlay = document.createElement("div")
+          overlay.style.position = "fixed"
+          overlay.style.bottom = "0"
+          overlay.style.left = "0"
+          overlay.style.width = "100%"
+          overlay.style.height = "0"
+          overlay.style.backgroundColor = "#3498db"
+          overlay.style.zIndex = "9999"
+
+          document.body.appendChild(overlay)
 
           gsap.to(overlay, {
             duration: 1,
             height: "100%",
             ease: "power2.inOut",
             onComplete: () => {
-              window.location.href = "../demonSlayer/Slayer.html";
+              window.location.href = "../demonSlayer/Slayer.html"
             },
-          });
+          })
 
           gsap.to(document.body, {
             duration: 0.6,
             opacity: 0,
             ease: "power2.inOut",
-          });
+          })
 
-          return;
+          return
         }
 
-        //RESETTIAMO IL TIMER
-        avviaTimer();
+        // reset timer
+        avviaTimer()
 
-        // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">12</span>`;
+        // numero domanda
+        nrDomanda[0].innerText = `QUESTION ${indiceGlobale + 1}`
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">12</span>`
 
-        //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
-        domanda.innerText = domande[indice].domanda;
+        // domanda
+        domanda.innerText = domande[indice].domanda
 
-        //MOSTRIAMO LE RISPOSTE CORRISPONDENTI
+        // risposte
         bottoni.forEach((bottone, i) => {
-          bottone.innerText = domande[indice].risposte[i];
+          bottone.innerText = domande[indice].risposte[i]
 
-          //AL CLICK FAI QUESTO
           bottone.onclick = function () {
-            // disabilita tutti i bottoni per evitare spam click
-            bottoni.forEach((btn) => (btn.disabled = true));
+            bottoni.forEach((btn) => (btn.disabled = true))
 
-            // risposta corretta
             if (i === domande[indice].corretta) {
-              bottone.classList.add("correct");
-              punteggio++;
+              bottone.classList.add("correct")
+              punteggio++
             } else {
-              bottone.classList.add("wrong");
-
-              // evidenzia anche quella giusta
-              bottoni[domande[indice].corretta].classList.add("correct");
+              bottone.classList.add("wrong")
+              bottoni[domande[indice].corretta].classList.add("correct")
             }
 
-            // aspetta 1 secondo prima di cambiare domanda
             setTimeout(() => {
-              // reset classi
               bottoni.forEach((btn) => {
-                btn.classList.remove("correct", "wrong");
-                btn.disabled = false;
-              });
+                btn.classList.remove("correct", "wrong")
+                btn.disabled = false
+              })
 
-              indice++;
-              indiceGlobale++;
-              mostraDomande();
-            }, 1000);
-          };
-        });
-      };
-
-      mostraDomande();
-
-      // MUSICA
-      window.addEventListener("load", () => {
-        const audio = document.getElementById("musicaAvatar");
-        audio.volume = 0.02;
-
-        audio.play().catch(() => {
-          window.addEventListener(
-            "click",
-            () => {
-              audio.volume = 0.02;
-              audio.play();
-            },
-            { once: true },
-          );
-        });
-      });
-      const risultato = Number(localStorage.getItem("punteggio"));
+              indice++
+              indiceGlobale++
+              mostraDomande()
+            }, 1000)
+          }
+        })
+      }
     </script>
   </body>
 </html>
