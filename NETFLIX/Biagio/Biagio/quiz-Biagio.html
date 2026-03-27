@@ -370,14 +370,15 @@
           if (secondi <= 0) {
             clearInterval(contatore);
             indice++;
-            nrDomanda[0].innerText = indice + 1;
+            nrDomanda[0].innerText = indiceGlobale + 1;
             mostraDomande();
           }
         }, 1000);
       }
 
       let indice = 0;
-      let punteggio = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 8;
       let answersGiven = [];
 
       //BOTTONE PER TORNARE INDIETRO ANCHE SE NON SERVE
@@ -408,9 +409,11 @@
         // SE FINISCONO LE DOMANDE
         if (indice >= breakingBadQuestions.length) {
           clearInterval(contatore);
-          localStorage.setItem("punteggio", punteggio);
-          domanda.style.display = "none";
-          document.querySelector(".punteggio-counter").style.display = "none";
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 12);
+          window.location.href = "../../assets/Antonio/pageAntonio1.html";
+          // domanda.style.display = "none";
+          // document.querySelector(".punteggio-counter").style.display = "none";
           // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
           // domanda.style.fontFamily = '"Montserrat" , sans-serif';
           // backBtn.style.display = "none";
@@ -424,18 +427,18 @@
           //   reloadBtn.onclick = () => location.reload();
           // }
           //CREA IL BOTTONE PER LA PROSSIMA PAGINA
-          if (!document.querySelector(".next-page-btn")) {
-            const nextPageBtn = document.createElement("a");
-            nextPageBtn.innerText = "Go to the next page";
-            nextPageBtn.classList.add("answer-btn", "btn");
-            nextPageBtn.setAttribute("href", "../page3/page3.html");
-            document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
-          }
+          // if (!document.querySelector(".next-page-btn")) {
+          //   const nextPageBtn = document.createElement("a");
+          //   nextPageBtn.innerText = "Go to the next page";
+          //   nextPageBtn.classList.add("answer-btn", "btn");
+          //   nextPageBtn.setAttribute("href", "../page3/page3.html");
+          //   document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
+          // }
 
-          bottoni.forEach((bottone) => (bottone.style.display = "none"));
-          document.querySelector(".timer").style.display = "none";
-          document.querySelector(".punteggio-counter p").style.visibility =
-            "hidden";
+          // bottoni.forEach((bottone) => (bottone.style.display = "none"));
+          // document.querySelector(".timer").style.display = "none";
+          // document.querySelector(".punteggio-counter p").style.visibility =
+          //   "hidden";
           return;
         }
 
@@ -443,8 +446,8 @@
         avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style=" color: #d20094;">${breakingBadQuestions.length}</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domanda.innerText = breakingBadQuestions[indice].question;
@@ -492,10 +495,12 @@
                 btn.classList.remove("sbagliata", "corretta");
                 btn.disabled = false;
               });
+
               mostraDomande();
             }, 2000);
             //IL NUMERINO DELLA DOMANDA CORRISPONDENTE SOTTO SI AGGIORNA
-            nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            // nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
           };
         });
       };
