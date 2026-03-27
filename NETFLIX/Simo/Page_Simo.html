@@ -208,6 +208,18 @@
         z-index: -2;
         opacity: 0.35;
       }
+      body {
+        animation: slideIn 0.7s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100vw);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
     </style>
   </head>
 
@@ -358,29 +370,13 @@
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 4);
 
-          const overlay = document.createElement("div");
-          overlay.style.position = "fixed";
-          overlay.style.bottom = "0";
-          overlay.style.left = "0";
-          overlay.style.width = "100%";
-          overlay.style.height = "0";
-          overlay.style.backgroundColor = "#3498db";
-          overlay.style.zIndex = "9999";
-          document.body.appendChild(overlay);
-
-          gsap.to(overlay, {
-            duration: 1,
-            height: "100%",
-            ease: "power2.inOut",
+          gsap.to(document.body, {
+            duration: 0.7,
+            x: "-100vw",
+            ease: "power3.inOut",
             onComplete: () => {
               window.location.href = "../vale/pageVale.html";
             },
-          });
-
-          gsap.to(document.body, {
-            duration: 0.6,
-            opacity: 0,
-            ease: "power2.inOut",
           });
 
           return;

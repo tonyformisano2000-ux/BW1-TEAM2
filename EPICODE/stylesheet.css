@@ -360,3 +360,42 @@ input[type="checkbox"]:checked::after {
 #stars span.hovered {
   transform: scale(1.4);
 }
+/* PAGINA 4 - BOTTONE NETFLIX*/
+.btn {
+  background: #000;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border: 2px solid #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.btn:hover {
+  border-color: #e50914;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+  transform: scale(1.04);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.page4footer button:first-child {
+  margin-right: 5rem;
+}
+
+.netflix-img {
+  width: 22px;      
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  transform: translateY(1px);
+}
