@@ -420,7 +420,7 @@
 
           //AL CLICK FAI QUESTO
           bottone.onclick = function () {
-            if (i === domande[indice].corretta) {
+            if (i === domande[indice].corretta - 1) {
               punteggio++;
               const trueFalse = document.querySelector(".page2footer");
               const getSwifty = document.createElement("img");
