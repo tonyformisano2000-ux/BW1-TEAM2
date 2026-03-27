@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Netflix Theme</title>
+    <title>Game of Thrones</title>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap");
@@ -255,7 +255,7 @@
         </div>
       </div>
     </main>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       // timer
       let contatore = null;
@@ -338,7 +338,33 @@
 
       function mostraDomanda() {
         if (indice >= questions.length) {
-          window.location.href = "../vale/pageVale.html";
+          localStorage.setItem("punteggio", punteggio);
+
+          const overlay = document.createElement("div");
+          overlay.style.position = "fixed";
+          overlay.style.bottom = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "0";
+          overlay.style.backgroundColor = "#3498db";
+          overlay.style.zIndex = "9999";
+          document.body.appendChild(overlay);
+
+          gsap.to(overlay, {
+            duration: 1,
+            height: "100%",
+            ease: "power2.inOut",
+            onComplete: () => {
+              window.location.href = "../vale/pageVale.html";
+            },
+          });
+
+          gsap.to(document.body, {
+            duration: 0.6,
+            opacity: 0,
+            ease: "power2.inOut",
+          });
+
           return;
         }
 
