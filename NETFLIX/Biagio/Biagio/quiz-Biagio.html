@@ -411,6 +411,7 @@
           clearInterval(contatore);
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 12);
+          console.log(indiceGlobale);
           window.location.href = "../../assets/Antonio/pageAntonio1.html";
           // domanda.style.display = "none";
           // document.querySelector(".punteggio-counter").style.display = "none";
@@ -448,6 +449,8 @@
         // QUANTE DOMANDE ABBIAMO?
         nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
         nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
+
+        console.log(indiceGlobale);
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domanda.innerText = breakingBadQuestions[indice].question;
@@ -490,6 +493,7 @@
             //UNA PAUSA DI 2 SECONDI PRIMA DI MOSTRARE LA PROSSIMA DOMANDA
             setTimeout(() => {
               indice++;
+              indiceGlobale++;
               //RIMUOVIAMO LE CLASSI AI BOTTONI , CHE VERRANO RIASSEGNATE AL PROSSIMO GIRO
               bottoni.forEach((btn) => {
                 btn.classList.remove("sbagliata", "corretta");
@@ -501,6 +505,7 @@
             //IL NUMERINO DELLA DOMANDA CORRISPONDENTE SOTTO SI AGGIORNA
             // nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
             nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+            console.log(indiceGlobale);
           };
         });
       };
