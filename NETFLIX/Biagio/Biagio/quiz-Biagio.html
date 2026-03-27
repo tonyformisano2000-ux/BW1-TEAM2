@@ -370,14 +370,15 @@
           if (secondi <= 0) {
             clearInterval(contatore);
             indice++;
-            nrDomanda[0].innerText = indice + 1;
+            nrDomanda[0].innerText = indiceGlobale + 1;
             mostraDomande();
           }
         }, 1000);
       }
 
       let indice = 0;
-      let punteggio = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 8;
       let answersGiven = [];
 
       //BOTTONE PER TORNARE INDIETRO ANCHE SE NON SERVE
@@ -408,7 +409,8 @@
         // SE FINISCONO LE DOMANDE
         if (indice >= breakingBadQuestions.length) {
           clearInterval(contatore);
-          localStorage.setItem("punteggio", punteggio);
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 12);
           domanda.style.display = "none";
           document.querySelector(".punteggio-counter").style.display = "none";
           // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
@@ -443,8 +445,8 @@
         avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style=" color: #d20094;">${breakingBadQuestions.length}</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domanda.innerText = breakingBadQuestions[indice].question;
@@ -492,10 +494,12 @@
                 btn.classList.remove("sbagliata", "corretta");
                 btn.disabled = false;
               });
+
               mostraDomande();
             }, 2000);
             //IL NUMERINO DELLA DOMANDA CORRISPONDENTE SOTTO SI AGGIORNA
-            nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            // nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
           };
         });
       };
