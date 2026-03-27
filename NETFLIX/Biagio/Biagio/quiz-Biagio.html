@@ -247,7 +247,7 @@
     <audio
       id="audio-traccia"
       src="./audio/Breaking Bad Main Title Theme (Extended) - Dave Porter.mp3"
-      .
+      volume="0.3"
     ></audio>
     <div class="page">
       <main class="quiz-layout">
@@ -550,6 +550,11 @@
         });
       };
       mostraDomande();
+      document.addEventListener("click", function () {
+        const audio = document.getElementById("audio-traccia");
+        audio.volume = 0.01;
+        audio.play();
+      });
     </script>
   </body>
 </html>
