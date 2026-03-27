@@ -159,70 +159,111 @@
         </footer>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <script>
+      function navigaConScroll(url) {
+        document.body.style.animation = "none";
+        document.body.style.opacity = "1";
+        document.body.style.transform = "translateY(0px)";
+        document.body.style.pointerEvents = "none";
+
+        const dur = 900;
+        const start = performance.now();
+
+        function ease(t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame((firstFrame) => {
+            function frame(now) {
+              const raw = Math.min((now - start) / dur, 1);
+              const y = -ease(raw) * window.innerHeight;
+
+              let x = 0;
+              if (raw > 0.85) {
+                x =
+                  Math.sin(((raw - 0.85) / 0.15) * Math.PI * 6) *
+                  4 *
+                  (1 - (raw - 0.85) / 0.15);
+              }
+
+              document.body.style.transform = `translateY(${y}px) translateX(${x}px)`;
+
+              if (raw < 1) {
+                requestAnimationFrame(frame);
+              } else {
+                window.location.href = url;
+              }
+            }
+
+            frame(firstFrame);
+          });
+        });
+      }
       // ELEMENTI VIDEO + QUIZ
-      const container = document.getElementById("videoContainer")
-      const video = document.getElementById("introVideo")
-      const audio = document.getElementById("musicaAvatar")
-      const quiz = document.getElementById("quiz")
+
+      const video = document.getElementById("introVideo");
+      const container = document.getElementById("videoContainer");
+      const quiz = document.getElementById("quiz");
+      const audio = document.getElementById("musicaAvatar");
 
       // Avvio video al click
       container.addEventListener(
         "click",
         function () {
-          video.volume = 0.2
-          video.play()
+          video.volume = 0.2;
+          video.play();
           // nascondi il testo dopo il click
-          document.querySelector(".click-hint")?.remove()
+          document.querySelector(".click-hint")?.remove();
         },
         // riproduci una volta sola
         { once: true },
-      )
+      );
 
       // Quando finisce il video
       video.addEventListener("ended", function () {
         // musica dopo tot secondi
         setTimeout(() => {
-          audio.volume = 0.03
-          audio.play().catch(() => {})
-        }, 900)
+          audio.volume = 0.03;
+          audio.play().catch(() => {});
+        }, 900);
 
         //quiz dopo tot secondi
         setTimeout(() => {
-          container.style.display = "none"
-          quiz.style.display = "block"
+          container.style.display = "none";
+          quiz.style.display = "block";
 
-          mostraDomande()
-        }, 2500)
-      })
+          mostraDomande();
+        }, 2500);
+      });
 
       // TIMER
-      let contatore = null
-      let nrDomanda = document.querySelectorAll("footer p span")
+      let contatore = null;
+      let nrDomanda = document.querySelectorAll("footer p span");
 
       function avviaTimer() {
-        clearInterval(contatore)
-        let secondi = 30
+        clearInterval(contatore);
+        let secondi = 30;
 
-        document.getElementById("numero").textContent = secondi
-        document.getElementById("arco").style.strokeDashoffset = 283
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
 
         contatore = setInterval(function () {
-          secondi--
+          secondi--;
 
-          document.getElementById("numero").textContent = Math.ceil(secondi)
+          document.getElementById("numero").textContent = Math.ceil(secondi);
 
-          let nascosto = (283 * secondi) / 30
-          document.getElementById("arco").style.strokeDashoffset = nascosto
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
 
           if (secondi <= 0) {
-            clearInterval(contatore)
-            indice++
-            indiceGlobale++
-            mostraDomande()
+            clearInterval(contatore);
+            indice++;
+            indiceGlobale++;
+            mostraDomande();
           }
-        }, 1000)
+        }, 1000);
       }
 
       // DOMANDE VALE
@@ -260,31 +301,24 @@
           risposte: ["Aang", "Sokka", "Katara", "Toph"],
           corretta: 3,
         },
-      ]
+      ];
 
-      let indice = 0
-      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0
-      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4
+      let indice = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4;
 
-      const domanda = document.querySelector(".quiz-layout h2")
-      const bottoni = document.querySelectorAll(".answer-btn")
+      const domanda = document.querySelector(".quiz-layout h2");
+      const bottoni = document.querySelectorAll(".answer-btn");
 
       //  MOSTRA DOMANDE
 
       function mostraDomande() {
         // fine quiz
         if (indice >= domande.length) {
-          localStorage.setItem("punteggioTotale", punteggio)
-          localStorage.setItem("indiceGlobale", 8)
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 8);
 
-          const overlay = document.createElement("div")
-          overlay.style.position = "fixed"
-          overlay.style.bottom = "0"
-          overlay.style.left = "0"
-          overlay.style.width = "100%"
-          overlay.style.height = "0"
-          overlay.style.backgroundColor = "#3498db"
-          overlay.style.zIndex = "9999"
+          navigaConScroll("../Biagio/Biagio/quiz-Biagio.html");
 
           document.body.appendChild(overlay)
 
@@ -307,21 +341,21 @@
         }
 
         // reset timer
-        avviaTimer()
+        avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
         nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`
         nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`
 
         // domanda
-        domanda.innerText = domande[indice].domanda
+        domanda.innerText = domande[indice].domanda;
 
         // risposte
         bottoni.forEach((bottone, i) => {
-          bottone.innerText = domande[indice].risposte[i]
+          bottone.innerText = domande[indice].risposte[i];
 
           bottone.onclick = function () {
-            bottoni.forEach((btn) => (btn.disabled = true))
+            bottoni.forEach((btn) => (btn.disabled = true));
 
             bottoni.forEach((btn, index) => {
               if (index === domande[indice].corretta) {
@@ -332,21 +366,25 @@
             })
 
             if (i === domande[indice].corretta) {
-              punteggio++
+              bottone.classList.add("correct");
+              punteggio++;
+            } else {
+              bottone.classList.add("wrong");
+              bottoni[domande[indice].corretta].classList.add("correct");
             }
 
             setTimeout(() => {
               bottoni.forEach((btn) => {
-                btn.classList.remove("correct", "wrong")
-                btn.disabled = false
-              })
+                btn.classList.remove("correct", "wrong");
+                btn.disabled = false;
+              });
 
-              indice++
-              indiceGlobale++
-              mostraDomande()
-            }, 1000)
-          }
-        })
+              indice++;
+              indiceGlobale++;
+              mostraDomande();
+            }, 1000);
+          };
+        });
       }
     </script>
   </body>

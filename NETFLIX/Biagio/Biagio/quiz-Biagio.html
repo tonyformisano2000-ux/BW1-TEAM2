@@ -24,8 +24,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 100vh;
-        min-width: 1000px;
+        min-height: 100vh;
         font-family: "Montserrat", sans-serif;
       }
       header {
@@ -35,6 +34,7 @@
         padding: 0 2em;
         margin: 0;
         box-sizing: border-box;
+        flex-wrap: wrap;
       }
       .br-logo img {
         width: 250px;
@@ -100,7 +100,6 @@
       main {
         border: 1px solid black;
         width: 60%;
-        max-width: 900px;
         height: fit-content;
         margin: 10em 0;
         border-radius: 20px;
@@ -124,36 +123,6 @@
         border-radius: 10px;
         box-shadow: 2px 2px 10px 2px black;
         font-family: "breakingBad", sans-serif;
-      }
-      .sbagliata {
-        background-color: #e50914;
-      }
-
-      .corretta {
-        background-color: green;
-      }
-
-      .sbagliata,
-      .corretta {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        width: 60%;
-        padding: 0.2em;
-        margin: 0 auto 1.5em;
-        border-radius: 20px;
-        font-size: 1.2em;
-        font-weight: bold;
-        transition: all 0.4s ease;
-        display: none;
-      }
-      .sbagliata img,
-      .corretta img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin-right: 1.5em;
       }
       .answers {
         display: grid;
@@ -248,7 +217,7 @@
     <audio
       id="audio-traccia"
       src="./audio/Breaking Bad Main Title Theme (Extended) - Dave Porter.mp3"
-      .
+      volume="0.3"
     ></audio>
     <div class="page">
       <main class="quiz-layout">
@@ -256,14 +225,6 @@
           <h2>Domanda</h2>
         </div>
         <div class="end-btn-wrapper"></div>
-        <div class="sbagliata">
-          <img src="./immagini-biagio/icona chimica.avif" alt="" />
-          <span>RISPOSTA SBAGLIATA</span>
-        </div>
-        <div class="corretta">
-          <img src="./immagini-biagio/icona verde.webp" alt="" />
-          <span>RISPOSTA ESATTA</span>
-        </div>
         <div class="answers">
           <button class="answer-btn">kjhsf</button>
           <button class="answer-btn">ds</button>
@@ -288,6 +249,46 @@
       <img src="./immagini-biagio/simbolochimico1.png" alt="" />
     </footer>
     <script>
+      function navigaConScroll(url) {
+        document.body.style.animation = "none";
+        document.body.style.opacity = "1";
+        document.body.style.transform = "translateY(0px)";
+        document.body.style.pointerEvents = "none";
+
+        const dur = 900;
+        const start = performance.now();
+
+        function ease(t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame((firstFrame) => {
+            function frame(now) {
+              const raw = Math.min((now - start) / dur, 1);
+              const y = -ease(raw) * window.innerHeight;
+
+              let x = 0;
+              if (raw > 0.85) {
+                x =
+                  Math.sin(((raw - 0.85) / 0.15) * Math.PI * 6) *
+                  4 *
+                  (1 - (raw - 0.85) / 0.15);
+              }
+
+              document.body.style.transform = `translateY(${y}px) translateX(${x}px)`;
+
+              if (raw < 1) {
+                requestAnimationFrame(frame);
+              } else {
+                window.location.href = url;
+              }
+            }
+
+            frame(firstFrame);
+          });
+        });
+      }
       document.addEventListener("click", function () {
         const audio = document.getElementById("audio-traccia");
         audio.volume = 0.1;
@@ -412,7 +413,8 @@
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 12);
           console.log(indiceGlobale);
-          window.location.href = "../../assets/Antonio/pageAntonio1.html";
+          navigaConScroll("../../assets/Antonio/pageAntonio1.html");
+
           // domanda.style.display = "none";
           // document.querySelector(".punteggio-counter").style.display = "none";
           // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
@@ -510,6 +512,11 @@
         });
       };
       mostraDomande();
+      document.addEventListener("click", function () {
+        const audio = document.getElementById("audio-traccia");
+        audio.volume = 0.01;
+        audio.play();
+      });
     </script>
   </body>
 </html>

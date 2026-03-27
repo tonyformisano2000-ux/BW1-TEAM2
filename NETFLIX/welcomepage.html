@@ -91,20 +91,22 @@
         </div>
         <button class="button" onclick="vaiAvanti()">PROCEDI</button>
         <script>
-            let difficoltaScelta = null;
+          let difficoltaScelta = null;
 
           function seleziona(btn) {
-            document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+            document
+              .querySelectorAll(".diff-btn")
+              .forEach((b) => b.classList.remove("selected"));
+            btn.classList.add("selected");
           }
-            function vaiAvanti() {
-              const check = document.getElementById("check");
-              if (check.checked) {
-                window.location.href = "./Simo/Page_Simo.html";
-              } else {
-                alert("devi prima spuntare la casella!!");
-              }
+          function vaiAvanti() {
+            const check = document.getElementById("check");
+            if (check.checked) {
+              window.location.href = "./Simo/Page_Simo.html";
+            } else {
+              alert("devi prima spuntare la casella!!");
             }
+          }
         </script>
       </footer>
     </div>

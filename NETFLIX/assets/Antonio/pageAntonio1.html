@@ -287,6 +287,46 @@
     </div>
     <!-- ---------------------------------------------------------------------JAVASCRIPT----------------------------------------------------------------------- -->
     <script>
+      function navigaConScroll(url) {
+        document.body.style.animation = "none";
+        document.body.style.opacity = "1";
+        document.body.style.transform = "translateY(0px)";
+        document.body.style.pointerEvents = "none";
+
+        const dur = 900;
+        const start = performance.now();
+
+        function ease(t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame((firstFrame) => {
+            function frame(now) {
+              const raw = Math.min((now - start) / dur, 1);
+              const y = -ease(raw) * window.innerHeight;
+
+              let x = 0;
+              if (raw > 0.85) {
+                x =
+                  Math.sin(((raw - 0.85) / 0.15) * Math.PI * 6) *
+                  4 *
+                  (1 - (raw - 0.85) / 0.15);
+              }
+
+              document.body.style.transform = `translateY(${y}px) translateX(${x}px)`;
+
+              if (raw < 1) {
+                requestAnimationFrame(frame);
+              } else {
+                window.location.href = url;
+              }
+            }
+
+            frame(firstFrame);
+          });
+        });
+      }
       // LOGICA PAGE 2
       // timer
       let contatore = null;
@@ -394,7 +434,7 @@
         if (indice >= domande.length) {
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 16);
-          window.location.href = "../../demonSlayer/Slayer.html";
+          navigaConScroll("../../demonSlayer/Slayer.html");
         }
 
         //RESETTIAMO IL TIMER
