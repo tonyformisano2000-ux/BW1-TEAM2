@@ -288,9 +288,6 @@
     <!-- ---------------------------------------------------------------------JAVASCRIPT----------------------------------------------------------------------- -->
     <script>
       function navigaConScroll(url) {
-        // FONDAMENTALE: ferma l'animazione CSS slideInDown prima di usare JS transform.
-        // Se l'animation CSS è ancora attiva, il browser ignora completamente
-        // i transform impostati via JS.
         document.body.style.animation = "none";
         document.body.style.opacity = "1";
         document.body.style.transform = "translateY(0px)";
@@ -303,7 +300,6 @@
           return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
         }
 
-        // doppio rAF per dare tempo al browser di "commitare" il reset CSS
         requestAnimationFrame(() => {
           requestAnimationFrame((firstFrame) => {
             function frame(now) {
@@ -438,7 +434,7 @@
         if (indice >= domande.length) {
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 16);
-          window.location.href = "../../demonSlayer/Slayer.html";
+          navigaConScroll("../../demonSlayer/Slayer.html");
         }
 
         //RESETTIAMO IL TIMER

@@ -287,9 +287,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       function navigaConScroll(url) {
-        // FONDAMENTALE: ferma l'animazione CSS slideInDown prima di usare JS transform.
-        // Se l'animation CSS è ancora attiva, il browser ignora completamente
-        // i transform impostati via JS.
+        
         document.body.style.animation = "none";
         document.body.style.opacity = "1";
         document.body.style.transform = "translateY(0px)";
@@ -302,7 +300,7 @@
           return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
         }
 
-        // doppio rAF per dare tempo al browser di "commitare" il reset CSS
+        
         requestAnimationFrame(() => {
           requestAnimationFrame((firstFrame) => {
             function frame(now) {
@@ -413,16 +411,7 @@
         if (indice >= questions.length) {
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 4);
-
-          gsap.to(document.body, {
-            duration: 0.7,
-            x: "-100vw",
-            ease: "power3.inOut",
-            onComplete: () => {
-              window.location.href = "../vale/pageVale.html";
-            },
-          });
-
+          navigaConScroll("../vale/pageVale.html");
           return;
         }
         questionNumSpan.innerText = `QUESTION ${indice + 1}`;

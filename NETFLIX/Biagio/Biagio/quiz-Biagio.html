@@ -289,9 +289,6 @@
     </footer>
     <script>
       function navigaConScroll(url) {
-        // FONDAMENTALE: ferma l'animazione CSS slideInDown prima di usare JS transform.
-        // Se l'animation CSS è ancora attiva, il browser ignora completamente
-        // i transform impostati via JS.
         document.body.style.animation = "none";
         document.body.style.opacity = "1";
         document.body.style.transform = "translateY(0px)";
@@ -304,7 +301,6 @@
           return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
         }
 
-        // doppio rAF per dare tempo al browser di "commitare" il reset CSS
         requestAnimationFrame(() => {
           requestAnimationFrame((firstFrame) => {
             function frame(now) {
@@ -456,7 +452,8 @@
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 12);
           console.log(indiceGlobale);
-          window.location.href = "../../assets/Antonio/pageAntonio1.html";
+          navigaConScroll("../../assets/Antonio/pageAntonio1.html");
+
           // domanda.style.display = "none";
           // document.querySelector(".punteggio-counter").style.display = "none";
           // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
