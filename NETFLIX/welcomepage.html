@@ -4,54 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WELCOME PAGE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./netflix-style.css" />
   </head>
   <body class="body">
-    <header>
+    <header class="page1header">
       <div>
         <img class="Logo" src="./assets/image copy.png" alt="Logo" />
       </div>
-    </header class="page1header">
+    </header>
     <div class="page">
-    <main class="welcome-layout ">
-      <h1>Sei un vero <span>cinefilo</span>?</h1>
-      <div class="Instruction">
-        <h3><span class="red" >Matti alla prova le tue conoscenze del mondo Netflix!</span></h3>
-        <p>
-          Non ci aspettiamo che la maggior parte dei fan conosca le risposte a tutte queste domande, solo i veri cultori sapranno far fronte a questa sfida! <br>
-          <span>Ricorda:</span>
-        </p>
-        <ul>
-          <li>
-            Ogni domanda ha <span>un tempo limite  e si può </span>
-            <span>rispondere una sola volta.</span>
-          </li>
-          <li>
-            Cambiare scheda del browser o aprire altre finestre
-            <span>invaliderà la domanda.</span>
-          </li>
-          <li>Questo quiz richiederà circa <span> 0-5 minuti</span></li>
-        </ul>
-      </div>
-    </main>
-    <footer>
-      <div class="check">
-        <input id="check" type="checkbox" />
-        <h5>"Giuro solennemente di non avere buone intenzioni"</h5>
-      </div>
-      <button class="button" onclick="vaiAvanti()">PROCEDI</button>
-      <script>
-        function vaiAvanti() {
-          const check = document.getElementById("check");
-          if (check.checked) {
-            window.location.href = "./Simo/Page_Simo.html";
-          } else {
-            alert("devi prima spuntare la casella!!");
+      <main class="welcome-layout">
+        <h1>Sei un vero <span>cinefilo</span>?</h1>
+        <div class="Instruction">
+          <h3>
+            <span class="red"
+              >Matti alla prova le tue conoscenze del mondo Netflix!</span
+            >
+          </h3>
+          <p>
+            Non ci aspettiamo che la maggior parte dei fan conosca le risposte a
+            tutte queste domande, solo i veri cultori sapranno far fronte a
+            questa sfida! <br />
+            <span>Ricorda:</span>
+          </p>
+          <ul>
+            <li>
+              Ogni domanda ha <span>un tempo limite e si può </span>
+              <span>rispondere una sola volta.</span>
+            </li>
+            <li>
+              Cambiare scheda del browser o aprire altre finestre
+              <span>invaliderà la domanda.</span>
+            </li>
+            <li>Questo quiz richiederà circa <span> 0-5 minuti</span></li>
+          </ul>
+        </div>
+      </main>
+
+      <footer>
+        <div class="check">
+          <input id="check" type="checkbox" />
+          <label for="check"
+            >"Giuro solennemente di non avere buone intenzioni"</label
+          >
+        </div>
+        <button class="button" onclick="vaiAvanti()">PROCEDI</button>
+        <script>
+          function vaiAvanti() {
+            const check = document.getElementById("check")
+            if (check.checked) {
+              window.location.href = "./Simo/Page_Simo.html"
+            } else {
+              alert("devi prima spuntare la casella!!")
+            }
           }
-        }
-      </script>
-    </footer>
+        </script>
+      </footer>
+    </div>
   </body>
 </html>
