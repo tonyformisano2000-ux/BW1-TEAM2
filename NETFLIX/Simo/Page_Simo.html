@@ -287,7 +287,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       function navigaConScroll(url) {
-        
         document.body.style.animation = "none";
         document.body.style.opacity = "1";
         document.body.style.transform = "translateY(0px)";
@@ -300,7 +299,6 @@
           return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
         }
 
-        
         requestAnimationFrame(() => {
           requestAnimationFrame((firstFrame) => {
             function frame(now) {
