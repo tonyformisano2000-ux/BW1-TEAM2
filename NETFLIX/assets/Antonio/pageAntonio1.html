@@ -37,7 +37,8 @@
         background-position-x: 100px;
         margin-top: 30px;
         align-items: center;
-        padding: 30px;
+        padding-bottom: 30px;
+        min-height: 300px;
       }
       h2 {
         margin-top: 33px !important;
@@ -58,7 +59,21 @@
         font-weight: 00;
         font-style: normal;
         margin: 35px;
+        display: inline-block;
+        font-size: 4rem;
+        animation: wave 2s ease-in-out infinite;
       }
+
+      @keyframes wave {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
       .answer-btn {
         margin: auto;
         transition: color 1s;
@@ -196,6 +211,35 @@
   </head>
   <!-- -------------------------------------------------------------------------HTML--------------------------------------------------------------------- -->
   <body>
+    <div class="positive">
+      <audio id="waba">
+        <source src="./wubalubadubdub.mp3" />
+      </audio>
+      <audio id="positiveCare">
+        <source src="./careful-made-with-Voicemod.mp3" />
+      </audio>
+      <audio>
+        <source src="./riggity-riggity-wrecked-son.mp3" />
+      </audio>
+      <audio id="iLikeWhatUgot">
+        <source src="./i_like_what_you_got.mp3" />
+      </audio>
+    </div>
+    <div class="negative">
+      <audio id="nope">
+        <source src="./nope.mp3" />
+      </audio>
+      <audio>
+        <source src="./ooh-hes-tryin.mp3" />
+      </audio>
+      <audio id="showMe">
+        <source src="./show_me_what_you_got.mp3" />
+      </audio>
+      <audio id="disqualified">
+        <source src="./disqualified.mp3" />
+      </audio>
+    </div>
+
     <header class="page2header">
       <div id="logo">
         <img
@@ -204,6 +248,9 @@
           alt="Logo"
           style="margin-left: auto"
         />
+      </div>
+      <div class="R&M">
+        <img />
       </div>
       <div class="timer">
         <svg width="120" height="120" viewBox="0 0 120 120">
@@ -217,7 +264,9 @@
     <div class="page">
       <main class="quiz-layout">
         <div id="h2">
-          <h1><i>"Show me what you got!"</i></h1>
+          <h1>
+            <i>"Show me what you Got!"</i>
+          </h1>
           <h2><!--DOMANDA--></h2>
         </div>
         <div class="answers">
@@ -297,8 +346,7 @@
         },
 
         {
-          domanda: `Cosa significa la famosa esclamazione di Rick
-             "Wubba Lubba Dub-Dub" ?`,
+          domanda: `Cosa significa la famosa esclamazione di Rick "Wubba Lubba Dub-Dub" ?`,
           risposte: [
             "Facciamo festa fino all'alba!",
             "Non mi importa di nulla.",
@@ -308,8 +356,8 @@
           corretta: 3,
         },
         {
-          domanda: `Come si chiamano le creature azzurre che vengono evocate 
-            da una scatola per risolvere un singolo compito e poi sparire?`,
+          domanda: `Come si chiamano le creature azzurre che vengono evocate
+              da una scatola per risolvere un singolo compito e poi sparire?`,
           risposte: [
             "I Cromuloni",
             "I Gazorpiani",
@@ -319,8 +367,8 @@
           corretta: 3,
         },
         {
-          domanda: `Cosa cercano di rubare a Rick gli alieni Zigeriani 
-            tramite una complessa simulazione virtuale?`,
+          domanda: `Cosa cercano di rubare a Rick gli alieni Zigeriani tramite
+            una complessa simulazione virtuale?`,
           risposte: [
             "Il liquido per i portali dimensionali.",
             "La formula della Materia Oscura Concentrata",
@@ -337,10 +385,13 @@
       const bottoni = document.querySelectorAll(".answer-btn");
       avviaTimer();
 
+      let xAudio = 1;
+      let yAudio = 1;
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
+          domanda.innerText = `Quiz finito!! Complimenti, Hai totalizzato ${punteggio} punti su ${domande.length}`;
+          domanda.style("margin", "auto");
           localStorage.setItem("punteggio", punteggio);
           const nextPageBtn = document.createElement("a");
           nextPageBtn.innerText += "See the result";
@@ -371,7 +422,30 @@
           bottone.onclick = function () {
             if (i === domande[indice].corretta) {
               punteggio++;
+              const trueFalse = document.querySelector(".page2footer");
+              const getSwifty = document.createElement("img");
+              getSwifty.src =
+                "./get-schwifty-clip-art-illustration-smile-cartoon-rick-and-morty-portal-76d609b09e14a451a1c3882e61bc81d3.png";
+              getSwifty.style.height = "30px";
+              trueFalse.appendChild(getSwifty);
+              const audio = document.querySelector(
+                `.positive audio:nth-of-type(${xAudio})`,
+              );
+              xAudio++;
+              audio.play();
+            } else {
+              const trueFalse = document.querySelector(".page2footer");
+              const wrong = document.createElement("img");
+              wrong.src = "./alien.png";
+              wrong.style.height = "30px";
+              trueFalse.appendChild(wrong);
+              const audio = document.querySelector(
+                `.negative audio:nth-of-type(${yAudio})`,
+              );
+              yAudio++;
+              audio.play();
             }
+
             indice++;
 
             nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
@@ -381,6 +455,14 @@
         });
       };
       mostraDomande();
+
+      const showMeWhatYouVeGot = document.querySelector("h1").innerText;
+      console.log(showMeWhatYouVeGot);
+      for (x = 0; x < 19; x++) {
+        console.log(x);
+        const wave = document.querySelector(`h1 span:nth-child(${x + 1})`);
+        wave.setAttribute("style", `animation-delay:0.${x}s`);
+      }
     </script>
   </body>
 </html>
