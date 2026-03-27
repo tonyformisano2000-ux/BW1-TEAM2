@@ -21,10 +21,10 @@ const results = (voto) => {
   torte.style.height = "350px";
   torte.style.borderRadius = "50%";
   torte.style.background = `conic-gradient(
-  #E50914 0%, 
+  #000000 0%, 
+  #000000 ${percentualeRisposteCorrette}%, 
   #E50914 ${percentualeRisposteCorrette}%, 
-  #221F1F ${percentualeRisposteCorrette}%, 
-  #221F1F 100%
+  #E50914 100%
 )`;
 
   const maskRule = "radial-gradient(circle, transparent 47%, black 47.1%)";
@@ -37,7 +37,7 @@ const results = (voto) => {
 
   if (voto >= 10) {
     innerCircleTextH6.innerHTML =
-      "Congratulations!<br><span><b>You passed the exam</b></span>";
+      "Congratulations!<br><span><b>You won!</b></span>";
     innerCircleTextP.innerText = `We'll send you the certificate
        in few minutes.
         Check your email.`;
@@ -45,7 +45,7 @@ const results = (voto) => {
     innerCircleTextH6.innerHTML = `Oops! 
       <span>
       <b>
-      You failed the exam</b>
+      You failed :( </b>
       </span>`;
     innerCircleTextP.innerText = `Come back soon and try 
      again, good luck!`;
