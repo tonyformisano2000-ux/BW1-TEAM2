@@ -53,13 +53,6 @@
         max-width: 90%;
       }
 
-      body {
-        cursor: url("./boomerang.png"), auto;
-        cursor:
-          url("./boomerang.png") 16 16,
-          auto;
-      }
-
       body::before {
         background-image: url(./avatar\ wallpaper1.jpg);
         background-size: contain;
@@ -84,10 +77,10 @@
         background: #2b1d02;
       }
 
-      .answer-btn:hover {
+      .answer-btn:not(.correct):not(.wrong):hover {
         background-image: url(./Balance.jpg);
+        background-color: 2px solid #2b1d02;
         cursor: pointer;
-        border: 3px solid #2b1d02;
         color: white;
         text-shadow:
           2px 2px 4px rgba(0, 0, 0, 0.9),
@@ -104,11 +97,13 @@
       }
 
       .correct {
-        background: #2ec4cc;
+        border-color: #2ec4cc;
+        box-shadow: 0 0 10px #2ec4cc;
       }
 
       .wrong {
-        background: #e74c3c;
+        border-color: #e74c3c;
+        box-shadow: 0 0 10px #e74c3c;
       }
 
       .avatarLogo {
@@ -222,6 +217,7 @@
           // nascondi il testo dopo il click
           document.querySelector(".click-hint")?.remove();
         },
+        // riproduci una volta sola
         { once: true },
       );
 
@@ -324,15 +320,32 @@
 
           navigaConScroll("../Biagio/Biagio/quiz-Biagio.html");
 
-          return;
+          document.body.appendChild(overlay)
+
+          gsap.to(overlay, {
+            duration: 1,
+            height: "100%",
+            ease: "power2.inOut",
+            onComplete: () => {
+              window.location.href = "../Biagio/Biagio/quiz-Biagio.html"
+            },
+          })
+
+          gsap.to(document.body, {
+            duration: 0.6,
+            opacity: 0,
+            ease: "power2.inOut",
+          })
+
+          return
         }
 
         // reset timer
         avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`
 
         // domanda
         domanda.innerText = domande[indice].domanda;
@@ -343,6 +356,14 @@
 
           bottone.onclick = function () {
             bottoni.forEach((btn) => (btn.disabled = true));
+
+            bottoni.forEach((btn, index) => {
+              if (index === domande[indice].corretta) {
+                btn.classList.add("correct")
+              } else {
+                btn.classList.add("wrong")
+              }
+            })
 
             if (i === domande[indice].corretta) {
               bottone.classList.add("correct");
