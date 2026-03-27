@@ -102,7 +102,7 @@ const mostraDomande = function (arr) {
 
   // QUANTE DOMANDE ABBIAMO?
   nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-  nrDomanda[1].innerHTML = `/ <span style=" color: #d20094;">${domande.length}</span>`;
+  nrDomanda[1].innerHTML = `/ <span style=" color: #e50914;">${domande.length}</span>`;
 
   //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
   domanda.innerText = domande[indice].domanda;

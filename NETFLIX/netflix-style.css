@@ -130,7 +130,7 @@ input {
 .button {
   padding: 15px 40px;
   background: transparent;
-  border: 2px solid red;
+  border: 2px solid #e50914;
   color: white;
   font-weight: bold;
   border-radius: 8px;

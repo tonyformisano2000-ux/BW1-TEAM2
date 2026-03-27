@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar Quiz</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../netflix-style.css" />
+    <style>
+      /* STILE VALE */
+      @font-face {
+        font-family: "Avatar Airbender";
+        src: url("./avatar.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        cursor: url("./boomerang.png"), auto;
+        cursor:
+          url("./boomerang.png") 16 16,
+          auto;
+      }
+
+      body::before {
+        background-image: url(./avatar\ wallpaper1.jpg);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .answer-btn {
+        width: 300px;
+        padding: 15px;
+        margin: auto;
+        border-radius: 50px;
+        background: transparent;
+        color: white;
+        font-family: "Avatar Airbender", sans-serif;
+        padding: 22px 32px;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        border: none;
+        border: 3px solid #bb8314;
+        background: #2b1d02;
+      }
+
+      .answer-btn:hover {
+        background-image: url(./Balance.jpg);
+        cursor: pointer;
+        border: 3px solid #2b1d02;
+        color: white;
+        text-shadow:
+          2px 2px 4px rgba(0, 0, 0, 0.9),
+          0 0 10px rgba(0, 0, 0, 0.8),
+          0 0 20px rgba(0, 0, 0, 0.6);
+      }
+
+      .quiz-layout h2 {
+        color: white;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+        font-family: "Avatar Airbender", sans-serif;
+        letter-spacing: 1px;
+        font-size: 3rem;
+      }
+
+      .correct {
+        background: #2ec4cc;
+      }
+
+      .wrong {
+        background: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="musicaAvatar" src="./AvatarSoundtrack.mp3" autoplay loop></audio>
+    <header class="page2header">
+      <div>
+        <img class="Logo" src="../assets/image copy.png" alt="Logo" />
+      </div>
+      <div class="timer">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="sfondo" cx="60" cy="60" r="45" />
+          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+        </svg>
+
+        <div class="numero" id="numero"></div>
+      </div>
+    </header>
+    <div class="page">
+      <main class="quiz-layout">
+        <div>
+          <h2><!--DOMANDA--></h2>
+        </div>
+        <div class="answers">
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+          <button class="answer-btn"></button>
+        </div>
+      </main>
+      <footer class="page2footer">
+        <p>
+          <span></span>
+          <span> </span>
+          <span class="fucsia"> </span>
+        </p>
+      </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+      // timer
+      let contatore = null;
+      let nrDomanda = document.querySelectorAll("footer p span");
+
+      function avviaTimer() {
+        clearInterval(contatore);
+        let secondi = 30;
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
+        contatore = setInterval(function () {
+          secondi = secondi - 1;
+          document.getElementById("numero").textContent = Math.ceil(secondi);
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
+
+          if (secondi <= 0) {
+            clearInterval(contatore);
+            indice++;
+            indiceGlobale++;
+            mostraDomande();
+          }
+        }, 1000);
+      }
+
+      // inizio quiz
+      // domande vale//
+      const domande = [
+        {
+          domanda: "Qual e' il tipo di te' preferito di Zio Iroh?",
+          risposte: [
+            "Te' al gelsomino",
+            "Te' al giglio",
+            "Te' del Loto Bianco",
+            "Te' al ginseng",
+          ],
+          corretta: 3,
+        },
+        {
+          domanda:
+            "Quale Avatar incontro' Aang durante il Solstizio d’Inverno?",
+          risposte: [
+            "Avatar Kyoshi",
+            "Avatar Roku",
+            "Avatar Kuruk",
+            "Avatar Yangchen",
+          ],
+          corretta: 1,
+        },
+        {
+          domanda: "Quale materiale uso' Sokka per creare la sua spada?",
+          risposte: ["Oro", "Platino", "Meteorite", "Giada"],
+          corretta: 2,
+        },
+        {
+          domanda:
+            "Chi fu il primo membro del gruppo a dare una possibilita' a Zuko dopo che cerco' di fare amicizia con loro al Tempio dell’Aria?",
+          risposte: ["Aang", "Sokka", "Katara", "Toph"],
+          corretta: 3,
+        },
+      ];
+      let indice = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4;
+      const domanda = document.querySelector(".quiz-layout h2");
+      const bottoni = document.querySelectorAll(".answer-btn");
+
+      const mostraDomande = function (arr) {
+        // SE FINISCONO LE DOMANDE
+        if (indice >= domande.length) {
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 8);
+          const overlay = document.createElement("div");
+          overlay.style.position = "fixed";
+          overlay.style.bottom = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "0";
+          overlay.style.backgroundColor = "#3498db";
+          overlay.style.zIndex = "9999";
+          document.body.appendChild(overlay);
+
+          gsap.to(overlay, {
+            duration: 1,
+            height: "100%",
+            ease: "power2.inOut",
+            onComplete: () => {
+              window.location.href = "../demonSlayer/Slayer.html";
+            },
+          });
+
+          gsap.to(document.body, {
+            duration: 0.6,
+            opacity: 0,
+            ease: "power2.inOut",
+          });
+
+          return;
+        }
+
+        //RESETTIAMO IL TIMER
+        avviaTimer();
+
+        // QUANTE DOMANDE ABBIAMO?
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">12</span>`;
+
+        //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
+        domanda.innerText = domande[indice].domanda;
+
+        //MOSTRIAMO LE RISPOSTE CORRISPONDENTI
+        bottoni.forEach((bottone, i) => {
+          bottone.innerText = domande[indice].risposte[i];
+
+          //AL CLICK FAI QUESTO
+          bottone.onclick = function () {
+            // disabilita tutti i bottoni per evitare spam click
+            bottoni.forEach((btn) => (btn.disabled = true));
+
+            // risposta corretta
+            if (i === domande[indice].corretta) {
+              bottone.classList.add("correct");
+              punteggio++;
+            } else {
+              bottone.classList.add("wrong");
+
+              // evidenzia anche quella giusta
+              bottoni[domande[indice].corretta].classList.add("correct");
+            }
+
+            // aspetta 1 secondo prima di cambiare domanda
+            setTimeout(() => {
+              // reset classi
+              bottoni.forEach((btn) => {
+                btn.classList.remove("correct", "wrong");
+                btn.disabled = false;
+              });
+
+              indice++;
+              indiceGlobale++;
+              mostraDomande();
+            }, 1000);
+          };
+        });
+      };
+
+      mostraDomande();
+
+      // MUSICA
+      window.addEventListener("load", () => {
+        const audio = document.getElementById("musicaAvatar");
+        audio.volume = 0.02;
+
+        audio.play().catch(() => {
+          window.addEventListener(
+            "click",
+            () => {
+              audio.volume = 0.02;
+              audio.play();
+            },
+            { once: true },
+          );
+        });
+      });
+      const risultato = Number(localStorage.getItem("punteggio"));
+    </script>
+  </body>
+</html>
