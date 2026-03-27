@@ -136,7 +136,7 @@
           if (secondi <= 0) {
             clearInterval(contatore);
             indice++;
-            nrDomanda[0].innerText = indice + 1;
+            indiceGlobale++;
             mostraDomande();
           }
         }, 1000);
@@ -179,14 +179,16 @@
         },
       ];
       let indice = 0;
-      let punteggio = 0;
-
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 4;
       const domanda = document.querySelector(".quiz-layout h2");
       const bottoni = document.querySelectorAll(".answer-btn");
 
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 8);
           const overlay = document.createElement("div");
           overlay.style.position = "fixed";
           overlay.style.bottom = "0";
@@ -219,8 +221,8 @@
         avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style=" color: #bb8314;">${domande.length}</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">12</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domanda.innerText = domande[indice].domanda;
@@ -254,6 +256,7 @@
               });
 
               indice++;
+              indiceGlobale++;
               mostraDomande();
             }, 1000);
           };

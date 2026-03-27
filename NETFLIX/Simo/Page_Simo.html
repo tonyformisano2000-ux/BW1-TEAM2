@@ -338,7 +338,8 @@
 
       function mostraDomanda() {
         if (indice >= questions.length) {
-          localStorage.setItem("punteggio", punteggio);
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 4);
 
           const overlay = document.createElement("div");
           overlay.style.position = "fixed";
