@@ -268,10 +268,17 @@
       // MUSICA
       window.addEventListener("load", () => {
         const audio = document.getElementById("musicaAvatar");
-        audio.volume = 0.4;
+        audio.volume = 0.02;
 
         audio.play().catch(() => {
-          window.addEventListener("click", () => audio.play(), { once: true });
+          window.addEventListener(
+            "click",
+            () => {
+              audio.volume = 0.02;
+              audio.play();
+            },
+            { once: true },
+          );
         });
       });
       const risultato = Number(localStorage.getItem("punteggio"));
