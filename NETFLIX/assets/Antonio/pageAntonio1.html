@@ -30,6 +30,10 @@
       header {
         margin: 0;
       }
+
+      .logazzo img {
+        width: 192px;
+      }
       #h2 {
         background: url(./alien.png);
         background-repeat: no-repeat;
@@ -59,7 +63,7 @@
         font-weight: 00;
         font-style: normal;
         margin: 35px;
-        display: inline-block;
+        display: block;
         font-size: 4rem;
         animation: wave 2s ease-in-out infinite;
       }
@@ -198,19 +202,33 @@
       }
 
       .page2footer {
-        display: inline-block;
+        display: flex;
         border-radius: 10px;
         background-color: rgba(101, 101, 101, 0.8);
         margin: 20px auto;
         padding: 0 10px;
+        vertical-align: center;
       }
       .page2footer p {
         display: inline-block;
+      }
+
+      .stickerCorrect {
+        filter: drop-shadow(0 0 12px rgb(128, 255, 0));
+        margin-left: 10px;
+      }
+      .stickerWrong {
+        filter: drop-shadow(0 0 12px rgb(255, 0, 0));
+        margin-left: 10px;
       }
     </style>
   </head>
   <!-- -------------------------------------------------------------------------HTML--------------------------------------------------------------------- -->
   <body>
+    <video class="video" width="100%vp" height="100%vp" autoplay>
+      <source src="./intro quiz.mp4" />
+    </video>
+
     <div class="positive">
       <audio id="waba">
         <source src="./wubalubadubdub.mp3" />
@@ -249,8 +267,10 @@
           style="margin-left: auto"
         />
       </div>
-      <div class="R&M">
-        <img />
+      <div class="logazzo">
+        <img
+          src="./toppng.com-rick-and-morty-logo-art-of-rick-and-morty-by-justin-roiland-801x295.png"
+        />
       </div>
       <div class="timer">
         <svg width="120" height="120" viewBox="0 0 120 120">
@@ -460,6 +480,7 @@
               getSwifty.src =
                 "./get-schwifty-clip-art-illustration-smile-cartoon-rick-and-morty-portal-76d609b09e14a451a1c3882e61bc81d3.png";
               getSwifty.style.height = "30px";
+              getSwifty.classList.add("stickerCorrect");
               trueFalse.appendChild(getSwifty);
               const audio = document.querySelector(
                 `.positive audio:nth-of-type(${xAudio})`,
@@ -471,6 +492,7 @@
               const wrong = document.createElement("img");
               wrong.src = "./alien.png";
               wrong.style.height = "30px";
+              wrong.classList.add("stickerWrong");
               trueFalse.appendChild(wrong);
               const audio = document.querySelector(
                 `.negative audio:nth-of-type(${yAudio})`,
@@ -478,7 +500,6 @@
               yAudio++;
               audio.play();
             }
-
             indice++;
             indiceGlobale++;
 
@@ -488,15 +509,11 @@
           };
         });
       };
+      const video = document.querySelector(".video");
+      video.addEventListener("click", () => {
+        video.play();
+      });
       mostraDomande();
-
-      const showMeWhatYouVeGot = document.querySelector("h1").innerText;
-      console.log(showMeWhatYouVeGot);
-      for (x = 0; x < 19; x++) {
-        console.log(x);
-        const wave = document.querySelector(`h1 span:nth-child(${x + 1})`);
-        wave.setAttribute("style", `animation-delay:0.${x}s`);
-      }
     </script>
   </body>
 </html>

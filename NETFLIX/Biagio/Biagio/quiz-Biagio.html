@@ -23,7 +23,6 @@
         margin: 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         min-height: 100vh;
         font-family: "Montserrat", sans-serif;
       }
@@ -50,11 +49,6 @@
       .page4header {
         background-color: black;
       }
-      /* .page2header {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-} */
       .bordo {
         fill: none;
         /* stroke: white; */
@@ -106,6 +100,7 @@
         box-shadow: 2px 2px 10px 2px black;
         background-color: rgba(255, 255, 255, 0.7);
         max-height: fit-content;
+        max-width: 900px;
       }
       main:hover {
         cursor: url(./immagini-biagio/cursor.png), auto;
@@ -180,10 +175,12 @@
       .sbagliata {
         background-color: #e50914;
         color: white;
+        box-shadow: 2px 2px 10px 2px #e50914;
       }
       .corretta {
         background-color: green;
         color: white;
+        box-shadow: 2px 2px 10px 2px green;
       }
       footer {
         background-color: black;
@@ -195,6 +192,32 @@
         width: 100px;
         height: 90px;
         border-radius: 10px;
+      }
+      #video-intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100vw;
+        height: 100vh;
+      }
+      .page,
+      footer,
+      header {
+        display: none;
+      }
+      #click {
+        z-index: 1;
+        color: rgb(210, 187, 17);
+        font-size: 1.2em;
+        font-weight: bold;
+        position: fixed;
+        bottom: 10%;
+        left: 50%;
+      }
+      #click:hover {
+        cursor: pointer;
+        color: white;
       }
     </style>
   </head>
@@ -214,6 +237,11 @@
         <div class="numero" id="numero"></div>
       </div>
     </header>
+    <video
+      id="video-intro"
+      src="./video/Breaking Bad Opening CreditsScene (Intro) 1080p Full HD.mp4"
+    ></video>
+    <p id="click">Click to continue !</p>
     <audio
       id="audio-traccia"
       src="./audio/Breaking Bad Main Title Theme (Extended) - Dave Porter.mp3"
@@ -249,6 +277,19 @@
       <img src="./immagini-biagio/simbolochimico1.png" alt="" />
     </footer>
     <script>
+      const video = document.querySelector("#video-intro");
+      document.addEventListener("click", function () {
+        video.play();
+        document.querySelector("#click").style.display = "none";
+      });
+      video.addEventListener("ended", function () {
+        video.style.display = "none";
+
+        document.getElementsByTagName("footer")[0].style.display = "flex";
+        document.querySelector(".page").style.display = "flex";
+        document.getElementsByTagName("header")[0].style.display = "flex";
+      });
+
       function navigaConScroll(url) {
         document.body.style.animation = "none";
         document.body.style.opacity = "1";
