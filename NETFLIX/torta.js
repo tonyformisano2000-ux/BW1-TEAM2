@@ -22,8 +22,8 @@ const results = (voto) => {
   torte.style.borderRadius = "50%";
   torte.style.background = `conic-gradient(
   #E50914 0%, 
-  #E50914 42%, 
-  #221F1F 42%, 
+  #E50914 ${percentualeRisposteCorrette}%, 
+  #221F1F ${percentualeRisposteCorrette}%, 
   #221F1F 100%
 )`;
 
