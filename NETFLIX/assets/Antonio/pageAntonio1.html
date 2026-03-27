@@ -30,6 +30,10 @@
       header {
         margin: 0;
       }
+
+      .logazzo img {
+        width: 192px;
+      }
       #h2 {
         background: url(./alien.png);
         background-repeat: no-repeat;
@@ -59,7 +63,7 @@
         font-weight: 00;
         font-style: normal;
         margin: 35px;
-        display: inline-block;
+        display: block;
         font-size: 4rem;
         animation: wave 2s ease-in-out infinite;
       }
@@ -203,14 +207,23 @@
         background-color: rgba(101, 101, 101, 0.8);
         margin: 20px auto;
         padding: 0 10px;
+        vertical-align: center;
       }
       .page2footer p {
         display: inline-block;
+      }
+      a {
+        visibility: hidden;
       }
     </style>
   </head>
   <!-- -------------------------------------------------------------------------HTML--------------------------------------------------------------------- -->
   <body>
+    <video width="100%vp" height="100%vp" autoplay>
+      <source src="./intro quiz.mp4" />
+    </video>
+    <a href=".page2footer"></a>
+
     <div class="positive">
       <audio id="waba">
         <source src="./wubalubadubdub.mp3" />
@@ -249,8 +262,10 @@
           style="margin-left: auto"
         />
       </div>
-      <div class="R&M">
-        <img />
+      <div class="logazzo">
+        <img
+          src="./toppng.com-rick-and-morty-logo-art-of-rick-and-morty-by-justin-roiland-801x295.png"
+        />
       </div>
       <div class="timer">
         <svg width="120" height="120" viewBox="0 0 120 120">
@@ -438,6 +453,7 @@
               const wrong = document.createElement("img");
               wrong.src = "./alien.png";
               wrong.style.height = "30px";
+              wrong.style.margin = "10px 5px";
               trueFalse.appendChild(wrong);
               const audio = document.querySelector(
                 `.negative audio:nth-of-type(${yAudio})`,
@@ -445,7 +461,15 @@
               yAudio++;
               audio.play();
             }
-
+            const video = document.getElementsByTagName("video")[0];
+            console.log(video);
+            video.addEventListener("click", () => {
+              video.play();
+            });
+            const a = document.querySelector("a");
+            video.addEventListener("ended", function () {
+              a.click();
+            });
             indice++;
 
             nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
@@ -455,14 +479,6 @@
         });
       };
       mostraDomande();
-
-      const showMeWhatYouVeGot = document.querySelector("h1").innerText;
-      console.log(showMeWhatYouVeGot);
-      for (x = 0; x < 19; x++) {
-        console.log(x);
-        const wave = document.querySelector(`h1 span:nth-child(${x + 1})`);
-        wave.setAttribute("style", `animation-delay:0.${x}s`);
-      }
     </script>
   </body>
 </html>
