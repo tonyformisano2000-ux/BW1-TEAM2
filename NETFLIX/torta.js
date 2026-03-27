@@ -1,11 +1,11 @@
 const results = (voto) => {
   const correct = document.getElementById("correct");
-  const percentualeRisposteCorrette = Math.round((voto / 12) * 100);
+  const percentualeRisposteCorrette = Math.round((voto / 20) * 100);
 
   const H3 = document.querySelector("#correct h3");
   const p = document.querySelector("#correct p");
   H3.innerText = percentualeRisposteCorrette + "%";
-  p.innerText = `${voto} / 12 questions`;
+  p.innerText = `${voto} / 20 questions`;
 
   const wrong = document.getElementById("wrong");
   const percentualeRisposteSbagliate = 100 - percentualeRisposteCorrette;
@@ -13,7 +13,7 @@ const results = (voto) => {
   const WH3 = document.querySelector("#wrong h3");
   const Wp = document.querySelector("#wrong p");
   WH3.innerText = percentualeRisposteSbagliate + "%";
-  Wp.innerText = `${12 - voto} / 12 questions`;
+  Wp.innerText = `${20 - voto} / 20 questions`;
 
   const torte = document.getElementsByClassName("torta")[0];
 
@@ -22,8 +22,8 @@ const results = (voto) => {
   torte.style.borderRadius = "50%";
   torte.style.background = `conic-gradient(
   #E50914 0%, 
-  #E50914 42%, 
-  #221F1F 42%, 
+  #E50914 ${percentualeRisposteCorrette}%, 
+  #221F1F ${percentualeRisposteCorrette}%, 
   #221F1F 100%
 )`;
 
@@ -35,7 +35,7 @@ const results = (voto) => {
   let innerCircleTextH6 = document.querySelector(".torta_text>h6");
   let innerCircleTextP = document.querySelector(".torta_text>p");
 
-  if (voto >= 5) {
+  if (voto >= 10) {
     innerCircleTextH6.innerHTML =
       "Congratulations!<br><span><b>You passed the exam</b></span>";
     innerCircleTextP.innerText = `We'll send you the certificate

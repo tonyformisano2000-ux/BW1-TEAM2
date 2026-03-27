@@ -285,6 +285,7 @@
       <main class="quiz-layout">
         <div id="h2">
           <h1>
+            <a href="../../demonSlayer/Slayer.html"></a>
             <i>"Show me what you Got!"</i>
           </h1>
           <h2><!--DOMANDA--></h2>
@@ -306,6 +307,46 @@
     </div>
     <!-- ---------------------------------------------------------------------JAVASCRIPT----------------------------------------------------------------------- -->
     <script>
+      function navigaConScroll(url) {
+        document.body.style.animation = "none";
+        document.body.style.opacity = "1";
+        document.body.style.transform = "translateY(0px)";
+        document.body.style.pointerEvents = "none";
+
+        const dur = 900;
+        const start = performance.now();
+
+        function ease(t) {
+          return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+        }
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame((firstFrame) => {
+            function frame(now) {
+              const raw = Math.min((now - start) / dur, 1);
+              const y = -ease(raw) * window.innerHeight;
+
+              let x = 0;
+              if (raw > 0.85) {
+                x =
+                  Math.sin(((raw - 0.85) / 0.15) * Math.PI * 6) *
+                  4 *
+                  (1 - (raw - 0.85) / 0.15);
+              }
+
+              document.body.style.transform = `translateY(${y}px) translateX(${x}px)`;
+
+              if (raw < 1) {
+                requestAnimationFrame(frame);
+              } else {
+                window.location.href = url;
+              }
+            }
+
+            frame(firstFrame);
+          });
+        });
+      }
       // LOGICA PAGE 2
       // timer
       let contatore = null;
@@ -325,6 +366,7 @@
           if (secondi <= 0) {
             clearInterval(contatore);
             indice++;
+            indiceGlobale++;
             nrDomanda[0].innerText = indice + 1;
             mostraDomande();
           }
@@ -399,8 +441,8 @@
         },
       ];
       let indice = 0;
-      let punteggio = 0;
-
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 12;
       const domanda = document.querySelector(".quiz-layout h2");
       const bottoni = document.querySelectorAll(".answer-btn");
       avviaTimer();
@@ -410,26 +452,17 @@
       const mostraDomande = function (arr) {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domanda.innerText = `Quiz finito!! Complimenti, Hai totalizzato ${punteggio} punti su ${domande.length}`;
-          domanda.style("margin", "auto");
-          localStorage.setItem("punteggio", punteggio);
-          const nextPageBtn = document.createElement("a");
-          nextPageBtn.innerText += "See the result";
-          nextPageBtn.classList.add("answer-btn", "next-page-btn");
-          nextPageBtn.setAttribute("href", "../page3/page3.html");
-
-          domanda.appendChild(nextPageBtn);
-          bottoni.forEach((bottone) => (bottone.style.display = "none"));
-          document.querySelector(".timer").style.display = "none";
-          document.querySelector("footer p").style.visibility = "hidden";
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 16);
+          navigaConScroll("../../demonSlayer/Slayer.html");
         }
 
         //RESETTIAMO IL TIMER
         avviaTimer();
 
         // QUANTE DOMANDE ABBIAMO?
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style=" color: #ff0000;">${domande.length}</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domanda.innerText = domande[indice].domanda;
@@ -468,8 +501,9 @@
               audio.play();
             }
             indice++;
+            indiceGlobale++;
 
-            nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
 
             mostraDomande();
           };
