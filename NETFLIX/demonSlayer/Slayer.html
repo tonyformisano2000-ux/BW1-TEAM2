@@ -263,7 +263,7 @@
 
       let indice = 0;
       let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
-      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 8;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 12;
 
       // ELEMENTI DELLA PAGINA
 
@@ -280,7 +280,7 @@
         if (indice >= domande.length) {
           localStorage.setItem("punteggioFinale", punteggio);
 
-          domandaEl.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su 12`;
+          domandaEl.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su 20`;
 
           const nextPageBtn = document.createElement("a");
           nextPageBtn.innerText = "See the result";
@@ -298,7 +298,7 @@
 
         // NUMERO DOMANDA NEL FOOTER
         nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style="color: red;">12</span>`;
+        nrDomanda[1].innerHTML = `/ <span style="color: red;">20</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domandaEl.innerText = domande[indice].domanda;
