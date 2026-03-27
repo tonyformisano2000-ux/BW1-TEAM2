@@ -411,8 +411,9 @@
           clearInterval(contatore);
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 12);
-          domanda.style.display = "none";
-          document.querySelector(".punteggio-counter").style.display = "none";
+          window.location.href = "../../assets/Antonio/pageAntonio1.html";
+          // domanda.style.display = "none";
+          // document.querySelector(".punteggio-counter").style.display = "none";
           // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
           // domanda.style.fontFamily = '"Montserrat" , sans-serif';
           // backBtn.style.display = "none";
@@ -426,18 +427,18 @@
           //   reloadBtn.onclick = () => location.reload();
           // }
           //CREA IL BOTTONE PER LA PROSSIMA PAGINA
-          if (!document.querySelector(".next-page-btn")) {
-            const nextPageBtn = document.createElement("a");
-            nextPageBtn.innerText = "Go to the next page";
-            nextPageBtn.classList.add("answer-btn", "btn");
-            nextPageBtn.setAttribute("href", "../page3/page3.html");
-            document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
-          }
+          // if (!document.querySelector(".next-page-btn")) {
+          //   const nextPageBtn = document.createElement("a");
+          //   nextPageBtn.innerText = "Go to the next page";
+          //   nextPageBtn.classList.add("answer-btn", "btn");
+          //   nextPageBtn.setAttribute("href", "../page3/page3.html");
+          //   document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
+          // }
 
-          bottoni.forEach((bottone) => (bottone.style.display = "none"));
-          document.querySelector(".timer").style.display = "none";
-          document.querySelector(".punteggio-counter p").style.visibility =
-            "hidden";
+          // bottoni.forEach((bottone) => (bottone.style.display = "none"));
+          // document.querySelector(".timer").style.display = "none";
+          // document.querySelector(".punteggio-counter p").style.visibility =
+          //   "hidden";
           return;
         }
 
