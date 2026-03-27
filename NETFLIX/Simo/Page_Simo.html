@@ -255,6 +255,23 @@
         </div>
       </div>
     </main>
+    <footer
+      style="
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        text-align: center;
+        font-family: &quot;Cinzel&quot;, serif;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+      "
+    >
+      <p>
+        <span id="current-question-num">QUESTION 1</span>
+        <span style="color: rgba(255, 255, 255, 0.5)"> / </span>
+        <span style="color: #e8d48a">12</span>
+      </p>
+    </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
       // timer
@@ -335,10 +352,11 @@
       const titleH1 = document.querySelector("main h1");
       const cards = document.querySelectorAll(".glass");
       const container = document.querySelector(".container");
-
+      const questionNumSpan = document.getElementById("current-question-num");
       function mostraDomanda() {
         if (indice >= questions.length) {
-          localStorage.setItem("punteggio", punteggio);
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 4);
 
           const overlay = document.createElement("div");
           overlay.style.position = "fixed";
@@ -367,7 +385,7 @@
 
           return;
         }
-
+        questionNumSpan.innerText = `QUESTION ${indice + 1}`;
         const q = questions[indice];
         titleH1.textContent = q.question;
 

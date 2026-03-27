@@ -148,7 +148,7 @@
   </style>
   <body>
     <video autoplay muted loop id="bg-video">
-      <source src="./Video castle 1.mp4" type="video/mp4" />
+      <source src="./Video castle 3.mp4" type="video/mp4" />
     </video>
     <header class="page2header">
       <div>
@@ -218,6 +218,7 @@
           if (secondi <= 0) {
             clearInterval(contatore);
             indice++;
+            indiceGlobale++;
             mostraDomande();
           }
         }, 1000);
@@ -261,7 +262,8 @@
       ];
 
       let indice = 0;
-      let punteggio = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 8;
 
       // ELEMENTI DELLA PAGINA
 
@@ -276,14 +278,14 @@
       const mostraDomande = function () {
         // SE FINISCONO LE DOMANDE
         if (indice >= domande.length) {
-          domandaEl.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${domande.length}`;
-          localStorage.setItem("punteggio", punteggio);
+          localStorage.setItem("punteggioFinale", punteggio);
+
+          domandaEl.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su 12`;
 
           const nextPageBtn = document.createElement("a");
           nextPageBtn.innerText = "See the result";
           nextPageBtn.classList.add("answer-btn", "next-page-btn");
           nextPageBtn.setAttribute("href", "");
-
           domandaEl.appendChild(nextPageBtn);
 
           bottoni.forEach((bottone) => (bottone.style.display = "none"));
@@ -295,8 +297,8 @@
         avviaTimer();
 
         // NUMERO DOMANDA NEL FOOTER
-        nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
-        nrDomanda[1].innerHTML = `/ <span style=" color: red;">${domande.length}</span>`;
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: red;">12</span>`;
 
         //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
         domandaEl.innerText = domande[indice].domanda;
@@ -329,6 +331,7 @@
 
             setTimeout(() => {
               indice++;
+              indiceGlobale++;
               mostraDomande();
             }, 600);
           };
