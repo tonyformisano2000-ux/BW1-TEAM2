@@ -35,6 +35,34 @@
           <li>Questo quiz richiederà circa <span> 0-5 minuti</span></li>
         </ul>
       </div>
+       <div class="difficulty-section">
+          <h2 class="difficulty-title">Scegli la <span>difficoltà</span></h2>
+          <div class="difficulty-grid">
+ 
+            <button class="diff-btn easy" onclick="seleziona(this)">
+              <span class="diff-icon">🎬</span>
+              <span class="diff-label">Facile</span>
+              <span class="diff-sub">Per chi guarda Netflix<br>nel tempo libero</span>
+            </button>
+ 
+            <button class="diff-btn medium" onclick="seleziona(this)">
+              <span class="diff-icon">🍿</span>
+              <span class="diff-label">Medio</span>
+              <span class="diff-sub">Per i fan delle serie TV</span>
+            </button>
+ 
+            <button class="diff-btn hard" onclick="seleziona(this)">
+              <span class="diff-icon">🔥</span>
+              <span class="diff-label">Difficile</span>
+              <span class="diff-sub">Solo per i veri<br>cinefili incalliti</span>
+            </button>
+ 
+            <button class="diff-btn expert" onclick="seleziona(this)">
+              <span class="diff-icon">💀</span>
+              <span class="diff-label">Esperto</span>
+              <span class="diff-sub">Sei sicuro? Nessuno<br>arriva in fondo.</span>
+            </button>
+
     </main>
     <footer>
       <div class="check">
@@ -43,6 +71,12 @@
       </div>
       <button class="button" onclick="vaiAvanti()">PROCEDI</button>
       <script>
+        let difficoltaScelta = null;
+ 
+      function seleziona(btn) {
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      }
         function vaiAvanti() {
           const check = document.getElementById("check");
           if (check.checked) {
