@@ -281,7 +281,7 @@
       <p>
         <span id="current-question-num">QUESTION 1</span>
         <span style="color: rgba(255, 255, 255, 0.5)"> / </span>
-        <span style="color: #e8d48a">12</span>
+        <span style="color: #e8d48a">20</span>
       </p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -370,24 +370,13 @@
           localStorage.setItem("punteggioTotale", punteggio);
           localStorage.setItem("indiceGlobale", 4);
 
-          const bgVideo = document.querySelector(".bg-video");
-          if (bgVideo) {
-            gsap.to(bgVideo, { duration: 0.3, volume: 0 });
-            bgVideo.pause();
-          }
-
-          preload.style.visibility = "visible";
-
           gsap.to(document.body, {
             duration: 0.7,
             x: "-100vw",
             ease: "power3.inOut",
-          });
-
-          gsap.to(preload, {
-            duration: 0.7,
-            left: "0%",
-            ease: "power3.inOut",
+            onComplete: () => {
+              window.location.href = "../vale/pageVale.html";
+            },
           });
 
           return;

@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="./biagio-style.css" /> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Trispace:wght@100..800&display=swap");
+      @font-face {
+        font-family: BreakingBad;
+        src: url(./Heart\ Breaking\ Bad.otf) format("truetype");
+      }
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        min-width: 1000px;
+        font-family: "Montserrat", sans-serif;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2em;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .br-logo img {
+        width: 250px;
+        height: 120px;
+      }
+      header img {
+        width: 200px;
+        height: 160px;
+      }
+
+      .page2header,
+      .page3header,
+      .page4header {
+        background-color: black;
+      }
+      /* .page2header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+} */
+      .bordo {
+        fill: none;
+        /* stroke: white; */
+        stroke: white;
+        stroke-width: 10;
+        transition: none;
+        stroke-dasharray: 283;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 0.9s linear;
+        transform: rotate(-90deg);
+        transform-origin: center;
+      }
+      .sfondo {
+        fill: none;
+        stroke: #e50914;
+        stroke-width: 10;
+      }
+      .timer {
+        position: relative;
+        width: 120px;
+        height: 120px;
+      }
+      #numero {
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .page {
+        flex: 1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+          url(./immagini-biagio/bg1.jpeg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        transition: all 3s ease-in-out;
+      }
+      main {
+        border: 1px solid black;
+        width: 60%;
+        max-width: 900px;
+        height: fit-content;
+        margin: 10em 0;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px 2px black;
+        background-color: rgba(255, 255, 255, 0.7);
+        max-height: fit-content;
+      }
+      main:hover {
+        cursor: url(./immagini-biagio/cursor.png), auto;
+      }
+      main h2 {
+        text-align: center;
+        font-size: 2.5em;
+        background-color: green;
+        font-weight: 400;
+        color: white;
+        width: fit-content;
+        margin: 3em auto;
+        padding: 0.3em;
+        border: 2px solid black;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px 2px black;
+        font-family: "breakingBad", sans-serif;
+      }
+      .sbagliata {
+        background-color: #e50914;
+      }
+
+      .corretta {
+        background-color: green;
+      }
+
+      .sbagliata,
+      .corretta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        width: 60%;
+        padding: 0.2em;
+        margin: 0 auto 1.5em;
+        border-radius: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        transition: all 0.4s ease;
+        display: none;
+      }
+      .sbagliata img,
+      .corretta img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 1.5em;
+      }
+      .answers {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2em;
+        padding: 0 2em;
+        margin-bottom: 3em;
+      }
+      .answer-btn {
+        display: inline-block;
+        padding: 1em 2em;
+        border-radius: 10px;
+        background-color: #d6b313;
+        box-shadow: 2px 2px 10px 2px;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+      .answer-btn:hover {
+        background-color: green;
+        color: white;
+        cursor: url(./immagini-biagio/cursor.png), auto;
+      }
+      .punteggio-counter p {
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .end-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn {
+        margin-top: 2em;
+        text-align: center;
+        text-decoration: none;
+        color: blue;
+      }
+      #back-btn {
+        background-color: #187bc1;
+        padding: 0.5em 1em;
+        font-weight: 600;
+        margin-left: 1em;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px 2px;
+        color: white;
+      }
+      #back-btn:hover {
+        cursor: pointer;
+        background-color: #73c0f8;
+        color: black;
+      }
+
+      .sbagliata {
+        background-color: #e50914;
+        color: white;
+      }
+      .corretta {
+        background-color: green;
+        color: white;
+      }
+      footer {
+        background-color: black;
+        padding: 1em 0;
+        display: flex;
+        justify-content: space-around;
+      }
+      footer img {
+        width: 100px;
+        height: 90px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page2header">
+      <div>
+        <img class="Logo" src="/NETFLIX/assets/image copy.png" alt="Logo" />
+      </div>
+      <div class="br-logo">
+        <img src="./immagini-biagio/Breaking_Bad_logo.svg.png" alt="" />
+      </div>
+      <div class="timer">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="sfondo" cx="60" cy="60" r="45" />
+          <circle class="bordo" id="arco" cx="60" cy="60" r="45" />
+        </svg>
+        <div class="numero" id="numero"></div>
+      </div>
+    </header>
+    <audio
+      id="audio-traccia"
+      src="./audio/Breaking Bad Main Title Theme (Extended) - Dave Porter.mp3"
+      .
+    ></audio>
+    <div class="page">
+      <main class="quiz-layout">
+        <div id="h2-wrapper">
+          <h2>Domanda</h2>
+        </div>
+        <div class="end-btn-wrapper"></div>
+        <div class="sbagliata">
+          <img src="./immagini-biagio/icona chimica.avif" alt="" />
+          <span>RISPOSTA SBAGLIATA</span>
+        </div>
+        <div class="corretta">
+          <img src="./immagini-biagio/icona verde.webp" alt="" />
+          <span>RISPOSTA ESATTA</span>
+        </div>
+        <div class="answers">
+          <button class="answer-btn">kjhsf</button>
+          <button class="answer-btn">ds</button>
+          <button class="answer-btn">sdf</button>
+          <button class="answer-btn">dsfdsf</button>
+        </div>
+        <!-- <div>
+          <button id="back-btn">Vedi domanda precedente</button>
+        </div> -->
+        <div class="punteggio-counter">
+          <p>
+            <span>DOMANDA</span>
+            <span>1</span>
+            <span class="fucsia"></span>
+          </p>
+        </div>
+      </main>
+    </div>
+    <footer class="page2footer">
+      <img src="./immagini-biagio/simbolochimica2.webp" alt="" />
+      <img src="./immagini-biagio/pinkman face.png" alt="" />
+      <img src="./immagini-biagio/simbolochimico1.png" alt="" />
+    </footer>
+    <script>
+      document.addEventListener("click", function () {
+        const audio = document.getElementById("audio-traccia");
+        audio.volume = 0.1;
+        audio.play();
+      });
+      const backgrounds = [
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg1.jpeg)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg2.jpeg)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg3.png)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg4.png)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg5.jpeg)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg6.png)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg7.png)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg8.jpeg)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg9.jpeg)`,
+        `    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+    url(./immagini-biagio/bg10.jpeg)`,
+      ];
+      const breakingBadQuestions = [
+        {
+          question: "Qual è il vero nome di Heisenberg?",
+          answers: [
+            "Jesse Pinkman",
+            "Walter White",
+            "Saul Goodman",
+            "Gus Fring",
+          ],
+          correct: "Walter White",
+        },
+        {
+          question: "Qual è la malattia di Walter White?",
+          answers: [
+            "Tumore ai polmoni",
+            "Diabete",
+            "Leucemia",
+            "Malattia cardiaca",
+          ],
+          correct: "Tumore ai polmoni",
+        },
+        {
+          question: "Chi è il cognato di Walter?",
+          answers: [
+            "Mike Ehrmantraut",
+            "Gus Fring",
+            "Hank Schrader",
+            "Todd Alquist",
+          ],
+          correct: "Hank Schrader",
+        },
+        {
+          question: "Qual è il lavoro di Jesse Pinkman all'inizio?",
+          answers: ["Avvocato", "Spacciatore", "Poliziotto", "Insegnante"],
+          correct: "Spacciatore",
+        },
+      ];
+
+      let contatore = null;
+      let nrDomanda = document.querySelectorAll(".punteggio-counter p span");
+
+      function avviaTimer() {
+        clearInterval(contatore);
+        let secondi = 30;
+        document.getElementById("numero").textContent = secondi;
+        document.getElementById("arco").style.strokeDashoffset = 283;
+        contatore = setInterval(function () {
+          secondi = secondi - 1;
+          document.getElementById("numero").textContent = Math.ceil(secondi);
+          let nascosto = (283 * secondi) / 30;
+          document.getElementById("arco").style.strokeDashoffset = nascosto;
+
+          if (secondi <= 0) {
+            clearInterval(contatore);
+            indice++;
+            nrDomanda[0].innerText = indiceGlobale + 1;
+            mostraDomande();
+          }
+        }, 1000);
+      }
+
+      let indice = 0;
+      let punteggio = Number(localStorage.getItem("punteggioTotale")) || 0;
+      let indiceGlobale = Number(localStorage.getItem("indiceGlobale")) || 8;
+      let answersGiven = [];
+
+      //BOTTONE PER TORNARE INDIETRO ANCHE SE NON SERVE
+      // const backBtn = document.getElementById("back-btn");
+      // backBtn.addEventListener("click", function () {
+      //   if (indice > 0) {
+      //     indice--;
+
+      //     if (answersGiven[indice] === true) {
+      //       punteggio--;
+      //       console.log(punteggio);
+      //     }
+      //     // document.querySelector(".page").style.backgroundImage =
+      //     //   backgrounds[Math.ceil(Math.random() * 9)];
+      //     document.querySelector(".page").style.backgroundImage =
+      //       backgrounds[indice];
+      //     // avviaTimer();
+      //     mostraDomande();
+      //   }
+      //   // backBtn.disabled = indice === 0;
+      // });
+
+      const domanda = document.querySelector(".quiz-layout h2");
+      const bottoni = document.querySelectorAll(".answer-btn");
+      // avviaTimer();
+
+      const mostraDomande = function (arr) {
+        // SE FINISCONO LE DOMANDE
+        if (indice >= breakingBadQuestions.length) {
+          clearInterval(contatore);
+          localStorage.setItem("punteggioTotale", punteggio);
+          localStorage.setItem("indiceGlobale", 12);
+          console.log(indiceGlobale);
+          window.location.href = "../../assets/Antonio/pageAntonio1.html";
+          // domanda.style.display = "none";
+          // document.querySelector(".punteggio-counter").style.display = "none";
+          // domanda.innerText = `Quiz finito!! Hai totalizzato ${punteggio} punti su ${breakingBadQuestions.length}`;
+          // domanda.style.fontFamily = '"Montserrat" , sans-serif';
+          // backBtn.style.display = "none";
+
+          //CREA BOTTONE PER IRCARICARE LA PAGINA
+          // if (!document.querySelector(".reload-page-btn")) {
+          //   const reloadBtn = document.createElement("button");
+          //   reloadBtn.innerText += "Try the quiz again";
+          //   reloadBtn.classList.add("answer-btn", "btn");
+          //   document.querySelector(".end-btn-wrapper").appendChild(reloadBtn);
+          //   reloadBtn.onclick = () => location.reload();
+          // }
+          //CREA IL BOTTONE PER LA PROSSIMA PAGINA
+          // if (!document.querySelector(".next-page-btn")) {
+          //   const nextPageBtn = document.createElement("a");
+          //   nextPageBtn.innerText = "Go to the next page";
+          //   nextPageBtn.classList.add("answer-btn", "btn");
+          //   nextPageBtn.setAttribute("href", "../page3/page3.html");
+          //   document.querySelector(".end-btn-wrapper").appendChild(nextPageBtn);
+          // }
+
+          // bottoni.forEach((bottone) => (bottone.style.display = "none"));
+          // document.querySelector(".timer").style.display = "none";
+          // document.querySelector(".punteggio-counter p").style.visibility =
+          //   "hidden";
+          return;
+        }
+
+        //RESETTIAMO IL TIMER
+        avviaTimer();
+
+        // QUANTE DOMANDE ABBIAMO?
+        nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+        nrDomanda[1].innerHTML = `/ <span style="color: #bb8314;">20</span>`;
+
+        console.log(indiceGlobale);
+
+        //MOSTRIAMO SEMPRE LA DOMANDA CORRISPONDENTE
+        domanda.innerText = breakingBadQuestions[indice].question;
+
+        //SE L'INDICE E MAGGIORE DI 0 PESCA DALL'ARRAY UN BACKGROUND A CASO
+        if (indice > 0) {
+          document.querySelector(".page").style.backgroundImage =
+            backgrounds[Math.ceil(Math.random() * 9)];
+        }
+
+        //MOSTRIAMO LE RISPOSTE CORRISPONDENTI
+        bottoni.forEach((bottone, i) => {
+          bottone.innerText = breakingBadQuestions[indice].answers[i];
+
+          //AL CLICK FAI QUESTO
+          bottone.onclick = function () {
+            //AZZERA IL CONTATORE
+            clearInterval(contatore);
+            const correctAnswer =
+              bottone.innerText === breakingBadQuestions[indice].correct;
+
+            const correct = breakingBadQuestions[indice].correct;
+            //DISABILITA I BOTTONI
+            bottoni.forEach((btn) => (btn.disabled = true));
+            //AGGIUNGE LA CLASSE CORRETTA A SECONDA CHE SIA SBAGLIATA O ESATTA
+            bottoni.forEach((btn) => {
+              if (btn.innerText === correct) {
+                btn.classList.add("corretta");
+              } else {
+                btn.classList.add("sbagliata");
+              }
+            });
+            //RACCOGLIAMO LE RISPOSTE CORRETTE IN UN ARRAY
+            answersGiven[indice] = correctAnswer;
+            //SE LA RISPOSTA ERA GIUSTA INCREMENTIAMO IL PUNTEGGIO
+            if (correctAnswer) {
+              punteggio++;
+              console.log(punteggio);
+            }
+            //UNA PAUSA DI 2 SECONDI PRIMA DI MOSTRARE LA PROSSIMA DOMANDA
+            setTimeout(() => {
+              indice++;
+              indiceGlobale++;
+              //RIMUOVIAMO LE CLASSI AI BOTTONI , CHE VERRANO RIASSEGNATE AL PROSSIMO GIRO
+              bottoni.forEach((btn) => {
+                btn.classList.remove("sbagliata", "corretta");
+                btn.disabled = false;
+              });
+
+              mostraDomande();
+            }, 2000);
+            //IL NUMERINO DELLA DOMANDA CORRISPONDENTE SOTTO SI AGGIORNA
+            // nrDomanda[0].innerText = `QUESTION  ${indice + 1}`;
+            nrDomanda[0].innerText = `QUESTION  ${indiceGlobale + 1}`;
+            console.log(indiceGlobale);
+          };
+        });
+      };
+      mostraDomande();
+    </script>
+  </body>
+</html>
